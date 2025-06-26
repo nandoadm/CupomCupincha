@@ -1,4 +1,4 @@
-package org.backendlogin.frontend;
+package org.cupinchacupons.frontend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -83,3 +83,11 @@ body {
 .login-button:hover {
     background-color: #e74d8b;
 }
+
+.login-error{
+    color: #000000;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

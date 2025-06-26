@@ -21,6 +21,8 @@
 
         <input class="input-field" type="text" name="username" placeholder="Username">
         <input class="input-field" type="password" name="password" placeholder="Password">
+
+        <p class="login-error" th:if="${user_error}" th:text="${user_error}"></p>
         <input class="login-button" type="submit">
     </form>
 </div>
