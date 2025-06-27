@@ -8,13 +8,12 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 public class SecurityConfig {
 
     private static final String[] PUBLIC_URLS = {
-            "/login/**",
+            "/login/",
             "/auth/**"
     };
 
@@ -37,10 +36,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests( auth ->{
                     auth.requestMatchers(PUBLIC_URLS).permitAll()
                             .requestMatchers(SWAGGER_LIST).permitAll()
-//                            .requestMatchers("/admin/**").hasRole("ADMIN")
+//                            .requestMatchers("/login/admin").hasRole("ADMIN")
                             .anyRequest().permitAll();
-                })
-                .addFilterBefore(securityUserFilter, UsernamePasswordAuthenticationFilter.class);
+                });
+//                .addFilterBefore(securityUserFilter, UsernamePasswordAuthenticationFilter.class);
         return httpSecurity.build();
     }
 
