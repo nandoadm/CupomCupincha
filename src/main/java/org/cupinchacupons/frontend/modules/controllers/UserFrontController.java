@@ -22,7 +22,7 @@ public class UserFrontController {
         return "users/login";
     }
 
-    @PostMapping("/signIn")
+    @PostMapping("/admin")
     public String signIn(RedirectAttributes redirectAttributes, @RequestParam String username, @RequestParam String password) {
         try {
             AuthUserRequestDTO authRequest = new AuthUserRequestDTO(username, password);
@@ -36,9 +36,8 @@ public class UserFrontController {
             return "redirect:/login/";
         }
     };
-
-//    @GetMapping("/admin")
-//    public String admin() {
-//        return "users/admin";
-//    }
+    @GetMapping("/admin")
+    public String admin() {
+        return "users/admin";
+    }
 }
