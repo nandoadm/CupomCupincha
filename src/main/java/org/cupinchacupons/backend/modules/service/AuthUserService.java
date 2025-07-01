@@ -54,7 +54,7 @@ public class AuthUserService {
         return AuthUserResponseDTO.builder()
                 .access_token(token)
                 .expires_in(expiresIn.toString())
-                .token(roles)
+                .role(roles)
                 .build();
 
     }

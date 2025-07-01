@@ -13,8 +13,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     private static final String[] PUBLIC_URLS = {
-            "/login/",
-            "/auth/**"
+            "/login/"
     };
 
     private static final String[] SWAGGER_LIST = {

@@ -1,6 +1,7 @@
 package org.cupinchacupons.frontend.modules.usecase;
 
 import org.cupinchacupons.backend.modules.dto.AuthUserRequestDTO;
+import org.cupinchacupons.frontend.modules.dto.TokenDTO;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -14,7 +15,7 @@ public class UserService {
     }
 
 
-    public String login(String username, String password) {
+    public TokenDTO login(String username, String password) {
         var authUserRequestDTO = new AuthUserRequestDTO(username, password);
 
         var result = webClient.post()
@@ -22,9 +23,9 @@ public class UserService {
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(authUserRequestDTO)
                 .retrieve()
-                .bodyToMono(String.class)
+                .bodyToMono(TokenDTO.class)
                 .block();
-        System.out.println("Retorno da requisição" + result);
+        System.out.println("Retorno da requisição " + result);
         return result;
 
     }

@@ -28,7 +28,10 @@ public class UserFrontController {
             return "users/admin";
 
         } catch (Exception e) {
-
+            if(username.isEmpty() || password.isEmpty()){
+                redirectAttributes.addFlashAttribute("user_error", "Preencha todos os campos");
+                return "redirect:/login/";
+            }
             redirectAttributes.addFlashAttribute("user_error", "Usuario/Senha incorretos");
             return "redirect:/login/";
         }

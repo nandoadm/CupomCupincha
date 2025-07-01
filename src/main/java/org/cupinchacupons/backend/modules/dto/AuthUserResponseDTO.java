@@ -15,5 +15,5 @@ public class AuthUserResponseDTO {
 
     private String access_token;
     private String expires_in;
-    private List<String> token;
+    private List<String> role;
 }
