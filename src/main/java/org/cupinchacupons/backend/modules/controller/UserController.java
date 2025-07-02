@@ -5,6 +5,7 @@ import org.cupinchacupons.backend.modules.Entity.UserEntity;
 import org.cupinchacupons.backend.modules.repository.UserRepository;
 import org.cupinchacupons.backend.modules.service.UserCreateService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,7 @@ public class UserController {
     }
 
     @PostMapping("/")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Object> createUser(@RequestBody @Valid UserEntity userEntity) {
         try {
             var result = this.userCreateService.execute(userEntity);

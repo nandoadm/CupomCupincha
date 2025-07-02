@@ -1,7 +1,11 @@
 package org.cupinchacupons.frontend.modules.controllers;
 
+import jakarta.servlet.http.HttpSession;
 import org.cupinchacupons.frontend.modules.usecase.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,23 +16,38 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/login")
 public class UserFrontController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+
+    public UserFrontController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("/")
     public String login() {
         return "users/login";
     }
 
-    @PostMapping("/admin")
-    public String signIn( RedirectAttributes redirectAttributes, String username, String password) {
+    @PostMapping("/do-login")
+    public String signIn(RedirectAttributes redirectAttributes, HttpSession session, String username, String password) {
         try {
-            userService.login(username, password);
 
-            return "users/admin";
+            var token = userService.login(username, password);
+            var grants = token.getRole().stream()
+                    .map(role -> new SimpleGrantedAuthority("ROLE_" + role.toUpperCase()))
+                    .toList();
 
+            UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(null, null, grants);
+            auth.setDetails((token));
+
+            SecurityContextHolder.getContext().setAuthentication(auth);
+            auth.getAuthorities().forEach(authority -> System.out.println("Permissão: " + authority.getAuthority()));
+            SecurityContext securityContext = SecurityContextHolder.getContext();
+            session.setAttribute("SPRING_SECURITY_CONTEXT", securityContext);
+            session.setAttribute("token", securityContext);
+
+            return "redirect:/admin/";
         } catch (Exception e) {
-            if(username.isEmpty() || password.isEmpty()){
+            if (username.isEmpty() || password.isEmpty()) {
                 redirectAttributes.addFlashAttribute("user_error", "Preencha todos os campos");
                 return "redirect:/login/";
             }
@@ -39,8 +58,5 @@ public class UserFrontController {
 
     ;
 
-    @GetMapping("/admin")
-    public String admin() {
-        return "users/admin";
-    }
+
 }

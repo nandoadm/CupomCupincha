@@ -25,6 +25,7 @@ public class UserService {
                 .retrieve()
                 .bodyToMono(TokenDTO.class)
                 .block();
+
         System.out.println("Retorno da requisição " + result);
         return result;
 
