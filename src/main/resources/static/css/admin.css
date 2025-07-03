@@ -1,0 +1,115 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    height: 100vh;
+}
+
+.cabecalho {
+    /*height: 60px;*/
+    /*background: linear-gradient(to right, #c6006d, #dc5186);*/
+}
+
+nav.menu-lateral {
+    width: 80px;
+    height: 100%;
+    background: linear-gradient(to right, #c6006d, #dc5186);
+    padding: 40px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    transition: width 1.2s ease-in-out, padding-left 1.2s ease-in-out;
+}
+
+nav.menu-lateral:hover {
+    width: 230px;
+}
+
+.btn-expandir {
+    width: 100%;
+    padding-left: 17px;
+    padding-bottom: 50px;
+}
+
+.btn-expandir > i {
+    color: white;
+    font-size: 35px;
+    cursor: pointer;
+}
+
+ul {
+    height: 100%;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    padding-left: 0;
+    margin: 0;
+}
+
+ul li.item-menu {
+    /* margem inferior opcional se não usar gap no ul */
+}
+
+/* Ajuste no link: não ocupa toda a largura, só o necessário */
+ul li.item-menu a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 10px;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+    border-radius: 8px;
+
+    width: fit-content; /* só ocupa o conteúdo */
+    justify-content: flex-start;
+    overflow: hidden;
+}
+
+/* Ícone no menu fechado fica centralizado dentro dos 50px */
+nav.menu-lateral:not(:hover) ul li.item-menu a .icon {
+    width: 50px;
+    margin-left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* No menu aberto, ícone com margem à esquerda */
+nav.menu-lateral:hover ul li.item-menu a .icon {
+    width: auto;
+    margin-left: 10px;
+    justify-content: flex-start;
+}
+
+/* Texto com transição suave de opacidade e largura */
+.txt-link {
+    opacity: 0;
+    max-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    transition: opacity 0.5s ease, max-width 0.5s ease;
+    display: inline-block;
+}
+
+/* Texto aparece suavemente ao expandir o menu */
+nav.menu-lateral:hover .txt-link {
+    opacity: 1;
+    max-width: 200px; /* ajuste conforme o texto */
+}
+
+/* Hover nos links */
+ul li.item-menu a:hover {
+    background-color: #e74d8b;
+}
+
+/* Tamanho dos ícones */
+.icon i {
+    font-size: 30px;
+}
