@@ -14,7 +14,7 @@ body {
 }
 
 nav.menu-lateral {
-    width: 80px;
+    width: 80px; /* largura inicial */
     height: 100%;
     background: linear-gradient(to right, #c6006d, #dc5186);
     padding: 40px 0;
@@ -22,25 +22,16 @@ nav.menu-lateral {
     top: 0;
     left: 0;
     overflow: hidden;
-    transition: width 1.2s ease-in-out, padding-left 1.2s ease-in-out;
+    transition: width 1.0s ease-in-out, padding-left 1.0s ease-in-out;
 }
 
-nav.menu-lateral:hover {
+/* Expande o menu só quando tiver a classe 'expandido' */
+nav.menu-lateral.expandido {
     width: 230px;
+    /*padding-left: 2%;*/
 }
 
-.btn-expandir {
-    width: 100%;
-    padding-left: 17px;
-    padding-bottom: 50px;
-}
-
-.btn-expandir > i {
-    color: white;
-    font-size: 35px;
-    cursor: pointer;
-}
-
+/* Ajustes para links */
 ul {
     height: 100%;
     list-style-type: none;
@@ -51,44 +42,39 @@ ul {
     margin: 0;
 }
 
-ul li.item-menu {
-    /* margem inferior opcional se não usar gap no ul */
-}
-
-/* Ajuste no link: não ocupa toda a largura, só o necessário */
 ul li.item-menu a {
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 15px 10px;
+    padding: 15px 0;
     color: white;
     text-decoration: none;
     font-size: 18px;
     transition: background-color 0.3s ease;
     border-radius: 8px;
 
-    width: fit-content; /* só ocupa o conteúdo */
+    width: fit-content; /* ocupa só o conteúdo */
     justify-content: flex-start;
     overflow: hidden;
 }
 
-/* Ícone no menu fechado fica centralizado dentro dos 50px */
-nav.menu-lateral:not(:hover) ul li.item-menu a .icon {
-    width: 50px;
+/* Ícone quando menu NÃO está expandido (centralizado no espaço de 80px) */
+nav.menu-lateral:not(.expandido) ul li.item-menu a .icon {
+    width: 80px;
     margin-left: 0;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* No menu aberto, ícone com margem à esquerda */
-nav.menu-lateral:hover ul li.item-menu a .icon {
+/* Ícone quando menu está expandido */
+nav.menu-lateral.expandido ul li.item-menu a .icon {
     width: auto;
-    margin-left: 10px;
+    margin-left: 25px;
     justify-content: flex-start;
 }
 
-/* Texto com transição suave de opacidade e largura */
+/* Texto escondido por padrão */
 .txt-link {
     opacity: 0;
     max-width: 0;
@@ -98,18 +84,31 @@ nav.menu-lateral:hover ul li.item-menu a .icon {
     display: inline-block;
 }
 
-/* Texto aparece suavemente ao expandir o menu */
-nav.menu-lateral:hover .txt-link {
+/* Texto aparece quando menu expandido */
+nav.menu-lateral.expandido .txt-link {
     opacity: 1;
-    max-width: 200px; /* ajuste conforme o texto */
+    max-width: 200px; /* ajuste conforme necessário */
 }
 
-/* Hover nos links */
+/* Hover no link */
 ul li.item-menu a:hover {
     background-color: #e74d8b;
 }
 
-/* Tamanho dos ícones */
+/* Ícones tamanho */
 .icon i {
     font-size: 30px;
+}
+
+/* Botão expandir */
+.btn-expandir {
+    width: 100%;
+    padding-left: 21px;
+    padding-bottom: 50px;
+}
+
+.btn-expandir > i {
+    color: white;
+    font-size: 35px;
+    cursor: pointer;
 }
