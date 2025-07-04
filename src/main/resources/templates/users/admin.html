@@ -13,8 +13,7 @@
 <body>
 
 <header class="cabecalho">
-    <div class="logo">
-    </div>
+    <div class="logo"></div>
 </header>
 
 <nav class="menu-lateral">
@@ -24,39 +23,68 @@
 
     <ul>
         <li class="item-menu">
-            <a href="#">
+            <a th:href="@{/admin/posts}">
                 <span class="icon"><i class="bi bi-patch-plus"></i></span>
                 <span class="txt-link">Todos os posts</span>
             </a>
         </li>
         <li class="item-menu">
-            <a href="#">
+            <a th:href="@{/admin/criar-cupom}">
                 <span class="icon"><i class="bi bi-ticket-perforated"></i></span>
                 <span class="txt-link">Criar Cupons</span>
             </a>
         </li>
         <li class="item-menu">
-            <a href="#">
+            <a th:href="@{/admin/categorias}">
                 <span class="icon"><i class="bi bi-tags"></i></span>
                 <span class="txt-link">Categorias</span>
             </a>
         </li>
         <li class="item-menu">
-            <a href="#">
+            <a th:href="@{/admin/lojas}">
                 <span class="icon"><i class="bi bi-shop"></i></span>
                 <span class="txt-link">Lojas</span>
             </a>
         </li>
         <li class="item-menu">
-            <a href="#">
+            <a th:href="@{/admin/pretty-links}">
+
                 <span class="icon"><i class="bi bi-star"></i></span>
                 <span class="txt-link">Pretty Links</span>
             </a>
         </li>
     </ul>
-
 </nav>
 
-</body>
+<main id="conteudo-principal" style="margin-left: 80px; padding: 20px;">
+    <div th:switch="${secao}">
+        <div th:case="'posts'">
+            <h1>Todos os Posts</h1>
+            <p>Aqui estão todos os posts cadastrados no sistema.</p>
+        </div>
+
+        <div th:case="'criar-cupom'">
+            <h1>Criar cupom</h1>
+            <p>Pagina destinada a criação de cupons</p>
+        </div>
+
+        <div th:case="'categorias'">
+            <h1>Ver categorias</h1>
+            <p>Pagina destinada para acessar as categorias</p>
+        </div>
+
+        <div th:case="'lojas'">
+            <h1>Ver Lojas</h1>
+            <p>Pagina destinada para ver as lojas</p>
+        </div>
+
+        <div th:case="'pretty-links'">
+            <h1>Pretty-links. O indesejado</h1>
+            <p>Pagina destinada a criação de links</p>
+        </div>
+    </div>
+</main>
+
 <script src="/js/menu.js"></script>
+</body>
 </html>

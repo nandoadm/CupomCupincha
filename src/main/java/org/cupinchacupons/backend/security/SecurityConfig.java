@@ -39,7 +39,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests( auth ->{
                     auth.requestMatchers(PUBLIC_URLS).permitAll()
                             .requestMatchers(SWAGGER_LIST).permitAll()
-                            .requestMatchers("/admin/").hasRole("ADMIN")
+                            .requestMatchers("/admin/**").hasRole("ADMIN")
                             .anyRequest().authenticated();
                 }).formLogin(auth -> auth.loginPage("/login/"));
                 httpSecurity.addFilterBefore(securityUserFilter, UsernamePasswordAuthenticationFilter.class);
