@@ -10,7 +10,6 @@ Antes de iniciar, é necessário ter instalado:
 
 - ✅ Java 17+
 - ✅ Maven 3.8+
-- ✅ Docker e Docker Compose
 - ✅ Postgres
 
 ---
