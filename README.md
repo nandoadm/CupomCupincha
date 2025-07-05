@@ -24,14 +24,14 @@ Antes de executar os comandos, crie um arquivo .env e altere as variaveis de amb
 
 # Banco de dados
 
-POSTGRES_DB=loginform
+POSTGRES_DB=cupincha_db
 
 POSTGRES_USER=SeuUsuario
 
 POSTGRES_PASSWORD=SuaSenha
 
 # Spring Boot datasource
-SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/loginform
+SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/cupincha_db
 
 SPRING_DATASOURCE_USERNAME=SeuUsuario
 

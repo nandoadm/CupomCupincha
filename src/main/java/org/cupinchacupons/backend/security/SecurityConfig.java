@@ -17,7 +17,9 @@ public class SecurityConfig {
             "/login/**",
             "/css/**",
             "/images/user-regular.svg",
-            "/auth/**"
+            "/auth/**",
+            "/home/",
+            "/js/**"
     };
 
     private static final String[] SWAGGER_LIST = {

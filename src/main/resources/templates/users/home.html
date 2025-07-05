@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../static/styles/header.css">
+    <link rel="stylesheet" href="../../static/styles/footer.css">
+    <link rel="stylesheet" href="../../static/styles/home.css">
+    <link rel="shortcut icon" href="../../static/icon/favicon.ico" type="image/x-icon">
+    <script src="/js/homeScript.js"></script>
+    <link rel="stylesheet" href="/css/home.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <title>Cupincha Cupons de desconto</title>
+    <meta name="description" content="Portal de cupons de desconto para as maiores lojas de todo o mundo! Aproveite agora e economize.">
+    <meta name="keywords" content="cupom, cupom de desconto, cupons, desconto, descontos, economizar">
+</head>
+<body>
+    
+    <header>
+        <div class="cabecalho">
+            <div class="tamanhoCabecalho">
+                <div class="cabecalhoInicio">
+                    <a href="index"><img src="../../static/logo/logo-completo.png" alt="" class="img_logo"></a>
+                    <div class="nameLogo">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="subCabecalho">
+            <nav>
+                <ul>
+                    <li class="navitens">
+                        <a href="#">Lojas</a>  
+                    </li>
+                    <li class="navitens">
+                        <a href="#">Categorias</a>  
+                    </li>
+                    <li class="navitens">
+                        <a href="#">Últimos cupons</a>  
+                    </li>
+                    <li class="navitens">
+                       <a href="#">Sobre nós</a> 
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="destaques">
+        <div class="lojas_destaque">
+            <div class="destaqueLinhaUm">
+                <a href="cupincha/cupincha/src/main/resources/templates/lojas/nike" target="_blank">
+                    <div class="destaque1">
+                        <div class="logoDestaque">
+                            <img src="../../static/logo/logo-nike.jpg" alt="">
+                        </div>
+                    </div>
+                </a>
+                <a href="cupincha/cupincha/src/main/resources/templates/lojas/madeiramadeira" target="_blank">
+                    <div class="destaque">
+                        <div class="logoDestaque">
+                            <img src="../../static/logo/logo-madeiramadeira.jpg" alt="">
+                        </div>
+                    </div>
+                </a>
+                <a href="cupincha/cupincha/src/main/resources/templates/lojas/casas-bahia" target="_blank">
+                    <div class="destaque">
+                        <div class="logoDestaque">
+                            <img src="../../static/logo/logo-casas-bahia.jpg" alt="">
+                        </div>
+                    </div>
+                </a>
+                <a href="cupincha/cupincha/src/main/resources/templates/lojas/americanas" target="_blank">
+                    <div class="destaque">
+                        <div class="logoDestaque">
+                            <img src="../../static/logo/logo-americanas.jpg" alt="">
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="destaqueLinhaDois">
+                <a href="cupincha/cupincha/src/main/resources/templates/lojas/centauro" target="_blank">
+                    <div class="destaque1">
+                        <div class="logoDestaque">
+                            <img src="../../static/logo/logo-centauro.jpg" alt="">
+                        </div>
+                    </div>
+                </a>
+                <a href="cupincha/cupincha/src/main/resources/templates/lojas/netshoes" target="_blank">
+                    <div class="destaque">
+                        <div class="logoDestaque">
+                            <img src="../../static/logo/logo-netshoes.jpg" alt="">
+                        </div>
+                    </div>
+                </a>
+                <a href="cupincha/cupincha/src/main/resources/templates/lojas/carrefour" target="_blank">
+                    <div class="destaque">
+                        <div class="logoDestaque">
+                            <img src="../../static/logo/logo-carrefour.jpg" alt="">
+                        </div>
+                    </div>
+                </a>
+                <a href="cupincha/cupincha/src/main/resources/templates/lojas/dafiti" target="_blank">
+                    <div class="destaque">
+                        <div class="logoDestaque">
+                            <img src="../../static/logo/logo-dafiti.jpg" alt="">
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <div class="coupon-popup" id="operador" style="display: none;">
+        <div class="popup-header">
+          <h3 class="popup-title">Desconto é no Cupincha!</h3>
+          <button class="popup-close" onclick="mostrarDiv()">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="popup-body">
+          <img src="#" alt="Logo da loja" id="imagemPopup" class="popup-logo">
+          
+          <div class="coupon-code-container">
+            <input type="text" id="codigo" class="coupon-code" value="" readonly>
+            <button class="copy-button" onclick="copiarCupom(); abrirNovaGuia();">
+              <i class="fas fa-copy"></i> Copiar
+            </button>
+          </div>
+      
+          <p class="popup-note">
+            <i class="fas fa-info-circle"></i> Você será redirecionado para a loja!
+          </p>
+        </div>
+      </div>
+      
+
+    <div class="cuponsHomePage">
+        <div class="tamanhoLimite">
+            <h2 class="tituloCuponsHome">
+                Os 25 melhores cupons da semana:
+            </h2>
+            <div class="divCupons">
+                <div class="cuponsLoja">
+
+
+                                                <!-- CUPONS DE DESCONTO-->
+
+
+                    <div class="cupomDesconto">
+                        <div class="logo_e_desconto">
+                            <div class="logoCupom">
+                                <img src="../../static/logo/logo-netshoes.jpg" alt="">
+                            </div>
+                            <div class="desconto_cupom">
+                                <h2 class="h2_desconto">
+                                    20% Off
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="organiza_cupom">
+                            <div class="descricao_cupom">
+                                <h2 class="h2_cupom">
+                                    Cupom de desconto Netshoes para utilizar em todas as suas compras!
+                                </h2>
+                                <p class="p_cupom">
+                                    Pegue agora o seu código e economize
+                                </p>
+                                <p class="validade_cupom">
+                                    Verificado hoje <br>
+                                    Validade: 
+                                </p>
+                            </div>
+                            <div class="btn_cupom">
+                                <button id="cupom1" class="pegar_cupom" onclick="mostrarDiv();
+                                    mostrarCodigo('NETSHOES20');
+                                    receberLink('https://www.netshoes.com.br/');
+                                    receberImagem('imagens/logo-netshoes.jpg');
+                                    exibirImagem()">
+                                        
+                                    Ver o Cupom!
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cupomDesconto">
+                        <div class="logo_e_desconto">
+                            <div class="logoCupom">
+                                <img src="../../static/logo/logo-centauro.jpg" alt="">
+                            </div>
+                            <div class="desconto_cupom">
+                                <h2 class="h2_desconto">
+                                    20% Off
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="organiza_cupom">
+                            <div class="descricao_cupom">
+                                <h2 class="h2_cupom">
+                                    O melhor cupom de desconto Centauro está aqui!
+                                </h2>
+                                <p class="p_cupom">
+                                    Pegue agora o seu código e economize
+                                </p>
+                                <p class="validade_cupom">
+                                    Verificado hoje <br>
+                                    Validade: 
+                                </p>
+                            </div>
+                            <div class="btn_cupom">
+                                <button id="cupom1" class="pegar_cupom" onclick="mostrarDiv();
+                                    mostrarCodigo('CENTAURO20');
+                                    receberLink('https://www.centauro.com.br/');
+                                    receberImagem('../../static/logo/logo-centauro.jpg');
+                                    exibirImagem()">
+                                        
+                                    Ver o Cupom!
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cupomDesconto">
+                        <div class="logo_e_desconto">
+                            <div class="logoCupom">
+                                <img src="../../static/logo/logo-casas-bahia.jpg" alt="">
+                            </div>
+                            <div class="desconto_cupom">
+                                <h2 class="h2_desconto">
+                                    20% Off
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="organiza_cupom">
+                            <div class="descricao_cupom">
+                                <h2 class="h2_cupom">
+                                    O melhor cupom de desconto Casas Bahia está aqui!
+                                </h2>
+                                <p class="p_cupom">
+                                    Pegue agora o seu código e economize
+                                </p>
+                                <p class="validade_cupom">
+                                    Verificado hoje <br>
+                                    Validade: 
+                                </p>
+                            </div>
+                            <div class="btn_cupom">
+                                <button id="cupom1" class="pegar_cupom" onclick="mostrarDiv();
+                                    mostrarCodigo('CASASBAHIA20');
+                                    receberLink('https://www.casasbahia.com.br/');
+                                    receberImagem('../../static/logo/logo-casas-bahia.jpg');
+                                    exibirImagem()">
+                                        
+                                    Ver o Cupom!
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cupomDesconto">
+                        <div class="logo_e_desconto">
+                            <div class="logoCupom">
+                                <img src="../../static/logo/logo-nike.jpg" alt="">
+                            </div>
+                            <div class="desconto_cupom">
+                                <h2 class="h2_desconto">
+                                    20% Off
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="organiza_cupom">
+                            <div class="descricao_cupom">
+                                <h2 class="h2_cupom">
+                                    O melhor cupom de desconto Nike está aqui!
+                                </h2>
+                                <p class="p_cupom">
+                                    Pegue agora o seu código e economize
+                                </p>
+                                <p class="validade_cupom">
+                                    Verificado hoje <br>
+                                    Validade: 
+                                </p>
+                            </div>
+                            <div class="btn_cupom">
+                                <button id="cupom1" class="pegar_cupom" onclick="mostrarDiv();
+                                    mostrarCodigo('NIKE20');
+                                    receberLink('https://www.nike.com.br');
+                                    receberImagem('imagens/logo-nike.jpg');
+                                    exibirImagem()">
+                                        
+                                    Ver o Cupom!
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cupomDesconto">
+                        <div class="logo_e_desconto">
+                            <div class="logoCupom">
+                                <img src="../../static/logo/logo-dafiti.jpg" alt="">
+                            </div>
+                            <div class="desconto_cupom">
+                                <h2 class="h2_desconto">
+                                    20% Off
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="organiza_cupom">
+                            <div class="descricao_cupom">
+                                <h2 class="h2_cupom">
+                                    O melhor cupom de desconto Dafiti está aqui!
+                                </h2>
+                                <p class="p_cupom">
+                                    Pegue agora o seu código e economize
+                                </p>
+                                <p class="validade_cupom">
+                                    Verificado hoje <br>
+                                    Validade: 
+                                </p>
+                            </div>
+                            <div class="btn_cupom">
+                                <button id="cupom1" class="pegar_cupom" onclick="mostrarDiv();
+                                    mostrarCodigo('DAFITI20');
+                                    receberLink('https://www.dafiti.com.br/');
+                                    receberImagem('imagens/logo-dafiti.jpg');
+                                    exibirImagem()">
+                                        
+                                    Ver o Cupom!
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cupomDesconto">
+                        <div class="logo_e_desconto">
+                            <div class="logoCupom">
+                                <img src="../../static/logo/logo-madeiramadeira.jpg" alt="">
+                            </div>
+                            <div class="desconto_cupom">
+                                <h2 class="h2_desconto">
+                                    20% Off
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="organiza_cupom">
+                            <div class="descricao_cupom">
+                                <h2 class="h2_cupom">
+                                    Cupom de desconto Madeira Madeira de até 20% Off!
+                                </h2>
+                                <p class="p_cupom">
+                                    Aplique o código no seu carrinho e garanta seus descontos
+                                </p>
+                                <p class="validade_cupom">
+                                    Verificado hoje <br>
+                                    Validade: indeterminada
+                                </p>
+                            </div>
+                            <div class="btn_cupom">
+                                <button id="cupom1" class="pegar_cupom" onclick="mostrarDiv();
+                                    mostrarCodigo('MADEIRA');
+                                    receberLink('https://www.madeiramadeira.com.br/');
+                                    receberImagem('imagens/logo-madeiramadeira.jpg');
+                                    exibirImagem()">
+                                        
+                                    Ver o Cupom!
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cupomDesconto">
+                        <div class="logo_e_desconto">
+                            <div class="logoCupom">
+                                <img src="../../static/logo/logo-carrefour.jpg" alt="">
+                            </div>
+                            <div class="desconto_cupom">
+                                <h2 class="h2_desconto">
+                                    20% Off
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="organiza_cupom">
+                            <div class="descricao_cupom">
+                                <h2 class="h2_cupom">
+                                    O melhor cupom de desconto Carrefour está aqui!
+                                </h2>
+                                <p class="p_cupom">
+                                    Pegue agora o seu código e economize
+                                </p>
+                                <p class="validade_cupom">
+                                    Verificado hoje <br>
+                                    Validade: 
+                                </p>
+                            </div>
+                            <div class="btn_cupom">
+                                <button id="cupom1" class="pegar_cupom" onclick="mostrarDiv();
+                                    mostrarCodigo('CARREFOUR20');
+                                    receberLink('https://www.carrefour.com.br/');
+                                    receberImagem('imagens/logo-carrefour.jpg');
+                                    exibirImagem()">
+                                        
+                                    Ver o Cupom!
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cupomDesconto">
+                        <div class="logo_e_desconto">
+                            <div class="logoCupom">
+                                <img src="../../static/logo/logo-americanas.jpg" alt="">
+                            </div>
+                            <div class="desconto_cupom">
+                                <h2 class="h2_desconto">
+                                    20% Off
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="organiza_cupom">
+                            <div class="descricao_cupom">
+                                <h2 class="h2_cupom">
+                                    O melhor cupom de desconto Americanas está aqui!
+                                </h2>
+                                <p class="p_cupom">
+                                    Pegue agora o seu código e economize
+                                </p>
+                                <p class="validade_cupom">
+                                    Verificado hoje <br>
+                                    Validade: 
+                                </p>
+                            </div>
+                            <div class="btn_cupom">
+                                <button id="cupom1" class="pegar_cupom" onclick="mostrarDiv();
+                                    mostrarCodigo('AMERICANAS20');
+                                    receberLink('https://www.americanas.com.br/');
+                                    receberImagem('imagens/logo-americanas.jpg');
+                                    exibirImagem()">
+                                        
+                                    Ver o Cupom!
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                                                   <!-- CUPONS DE DESCONTO-->
+
+
+                </div>
+            
+
+                                           
+            <div class="lojaPt2">
+                <div class="texto_lojapt2">
+                    <h3>Como usar o cupom?</h3>
+                    <p>Para utilizar o seu cupom, você deve clicar em <b>"Ver o Cupom!"</b></p>
+                    <p>Em seguida clique em <b>"Copiar cupom"</b> e aguarde para ser redirecionado para a loja.</p><br>
+                    <h3>Outras Lojas em Destaque</h3>
+                    <ul>
+                        <li><a href="#">MadeiraMadeira</a></li>
+                        <li><a href="#">Nike</a></li>
+                        <li><a href="#">Casas Bahia</a></li>
+                        <li><a href="#">Americanas</a></li>
+                        <li><a href="#">Centauro</a></li>
+                        <li><a href="#">Netshoes</a></li>
+                        <li><a href="#">Carrefour</a></li>
+                        <li><a href="#">Dafiti</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+    <div class="rodape" id="rodape">
+        <footer>
+            <div class="rodape1">
+                <div class="logorodape">
+                    <img src="../../static/logo/logo-completo.png" alt="">
+                </div>
+                <div class="solucoes">
+                    <h1>Conteúdo</h1>
+                    <a href="#">Cupons</a>
+                    <a href="#">Lojas</a>
+                    <a href="#">Artigos</a>
+                    <a href="#">Ofertas</a>
+                    <a href="#">Descontos</a>
+                </div>
+                <div class="contato">
+                    <h1>Fale Conosco</h1>
+                    <a href="#">Canais de contato</a>
+                    <a href="#">Formulário de atendimento</a>     
+                </div>
+
+                <div class="institucional">
+                    <h1>Institucional</h1>
+                    <a href="#">Sobre nós</a>
+                    <a href="#">Carreira</a>
+                    <a href="#">Eventos</a>
+                    <a href="#">Política de Privacidade</a>
+                </div>
+            </div>
+            
+            <div class="rodape2">
+                <!--
+                <div class="h2rodape2">
+                    <h2><b>A velocidade</b></h2>
+                    <h2>é o que nos move</h2>
+                </div>
+                
+                <div class="selos">
+                    <div>
+                        <img src="https://www.ipm.com.br/wp-content/uploads/2024/07/GPTW.svg" alt="">
+                    </div>
+                    <div>
+                        <img src="https://www.ipm.com.br/wp-content/uploads/2024/07/Trabalho-Etico.svg" alt="">
+                    </div>
+                    <div>
+                        <img src="https://www.ipm.com.br/wp-content/uploads/2024/01/empresa-limpa.svg" alt="">
+                    </div>
+                    <div>
+                        <img src="https://www.ipm.com.br/wp-content/uploads/2024/06/inovacao.webp" alt="">
+                    </div>
+                    <div>
+                        <img src="https://www.ipm.com.br/wp-content/uploads/2024/06/selo-melhor-mulher.svg" alt="">
+                    </div>
+                    <div>
+                        <img src="https://www.ipm.com.br/wp-content/uploads/2024/06/selo-melhor-lgbt.svg" alt="">
+                    </div>
+                </div>
+                -->
+            </div>
+            
+        </footer>
+    </div>
+
+</body>
+</html> 
