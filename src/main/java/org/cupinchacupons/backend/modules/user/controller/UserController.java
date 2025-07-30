@@ -5,13 +5,10 @@ import org.cupinchacupons.backend.modules.entity.UserEntity;
 import org.cupinchacupons.backend.modules.user.repository.UserRepository;
 import org.cupinchacupons.backend.modules.user.service.UserCreateService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/create-user")
+@RequestMapping("/api")
 public class UserController {
 
     private final UserRepository userRepository;
@@ -23,7 +20,7 @@ public class UserController {
         this.userCreateService = userCreateService;
     }
 
-    @PostMapping("/")
+    @PostMapping("/create-user")
     public ResponseEntity<Object> createUser(@RequestBody @Valid UserEntity userEntity) {
         try {
             var result = this.userCreateService.execute(userEntity);

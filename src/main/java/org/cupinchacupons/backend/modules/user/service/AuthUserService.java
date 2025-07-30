@@ -41,7 +41,7 @@ public class AuthUserService {
         // Header, Payload, Signature
 
         Algorithm algorithm = Algorithm.HMAC256(secretKey);
-        var expiresIn = Instant.now().plusSeconds(1800);
+        var expiresIn = Instant.now().plusSeconds(18000);
 
         var roles = List.of("ADMIN");
 

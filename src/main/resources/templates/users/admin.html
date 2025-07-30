@@ -48,7 +48,6 @@
         </li>
         <li class="item-menu">
             <a th:href="@{/admin/pretty-links}">
-
                 <span class="icon"><i class="bi bi-star"></i></span>
                 <span class="txt-link">Pretty Links</span>
             </a>
@@ -58,29 +57,93 @@
 
 <main id="conteudo-principal" style="margin-left: 80px; padding: 20px;">
     <div th:switch="${secao}">
+        <!-- Seção de posts -->
         <div th:case="'posts'">
             <h1>Todos os Posts</h1>
             <p>Aqui estão todos os posts cadastrados no sistema.</p>
+
+            <!-- Filtro -->
+            <form th:action="@{/admin/posts}" method="get">
+                <input type="text" name="filter" placeholder="Buscar por título"
+                       th:value="${filter}">
+                <select name="tipoFilter">
+                    <option value="Cupons">Cupons</option>
+                    <option value="Categorias">Categorias</option>
+                    <option value="Lojas">Lojas</option>
+                    <option value="Afiliados">Afiliados</option>
+                    <option value="Users">Users</option>
+                </select>
+                <button type="submit">Buscar</button>
+            </form>
+
+            <!-- Lista de cupons -->
+            <div th:if="${coupons != null}">
+                <p th:if="${#lists.isEmpty(coupons)}">Nenhum cupom encontrado</p>
+                <table th:if="${!#lists.isEmpty(coupons)}" border="1" cellpadding="5">
+                    <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>Código</th>
+                        <th>Validade</th>
+                        <th>Ativo</th>
+                        <th>Categoria</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="c : ${coupons}">
+                        <td th:text="${c.titulo}"></td>
+                        <td th:text="${c.codigo}"></td>
+                        <td th:text="${c.validade}"></td>
+                        <td th:text="${c.ativo == '1' ? 'Sim' : 'Não'}"></td>
+                        <td th:text="${c.categotiaDescricao} ?: 'N/A'"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
+        <!-- Outras seções -->
         <div th:case="'criar-cupom'">
-            <h1>Criar cupom</h1>
-            <p>Pagina destinada a criação de cupons</p>
+            <h1>Cadastro de Cupom</h1>
+            <form th:action="@{/admin/create-cupom}">
+                <label for="titulo">Titulo</label>
+                <input type="text" id="titulo" name="titulo">
+
+                <label for="descricao">Descricao</label>
+                <input type="text" id="descricao" name="descricao">
+
+                <label for="ativo">Ativo</label>
+                <select id="ativo" name="ativo" required>
+                    <option value="0">Não</option>
+                    <option value="1">Sim</option>
+                </select>
+
+                <label for="codigo">Código</label>
+                <input type="text" id="codigo" name="codigo" required>
+
+                <label for="restricoes">Restrições</label>
+                <textarea id="restricoes" name="restricoes" rows="4"></textarea>
+
+                <label for="validade">Validade</label>
+                <input type="date" id="validade" name="validade" required>
+
+                <button type="submit">Salvar</button>
+            </form>
         </div>
 
         <div th:case="'categorias'">
             <h1>Ver categorias</h1>
-            <p>Pagina destinada para acessar as categorias</p>
+            <p>Página destinada para acessar as categorias</p>
         </div>
 
         <div th:case="'lojas'">
             <h1>Ver Lojas</h1>
-            <p>Pagina destinada para ver as lojas</p>
+            <p>Página destinada para ver as lojas</p>
         </div>
 
         <div th:case="'pretty-links'">
-            <h1>Pretty-links. O indesejado</h1>
-            <p>Pagina destinada a criação de links</p>
+            <h1>Pretty-links</h1>
+            <p>Página destinada a criação de links</p>
         </div>
     </div>
 </main>

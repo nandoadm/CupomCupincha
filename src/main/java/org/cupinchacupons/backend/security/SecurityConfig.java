@@ -18,8 +18,9 @@ public class SecurityConfig {
             "/css/**",
             "/images/user-regular.svg",
             "/auth/**",
-            "/home/",
-            "/js/**"
+            "/cupincha/",
+            "/js/**",
+            "/api/**"
     };
 
     private static final String[] SWAGGER_LIST = {
@@ -43,7 +44,8 @@ public class SecurityConfig {
                             .requestMatchers(SWAGGER_LIST).permitAll()
                             .requestMatchers("/admin/**").hasRole("ADMIN")
                             .anyRequest().authenticated();
-                }).formLogin(auth -> auth.loginPage("/login/"));
+                })
+                .formLogin(auth -> auth.loginPage("/login/"));
                 httpSecurity.addFilterBefore(securityUserFilter, UsernamePasswordAuthenticationFilter.class);
         return httpSecurity.build();
     }

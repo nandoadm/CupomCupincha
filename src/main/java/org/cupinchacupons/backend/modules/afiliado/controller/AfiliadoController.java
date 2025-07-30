@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/painel")
+@RequestMapping("/api")
 public class AfiliadoController {
 
     private final CreateAfiliadoUseCase createAfiliadoUseCase;
