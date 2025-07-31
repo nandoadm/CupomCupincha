@@ -7,12 +7,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Service
-public class CreateCupomFrontService {
+public class CreateCupomService {
 
     private final WebClient webClient;
 
-    public CreateCupomFrontService(WebClient webClient) {
-        this.webClient = WebClient.builder().build();
+    public CreateCupomService(WebClient.Builder builder) {
+        this.webClient = builder
+                .baseUrl("http://localhost:8080") // sempre aponta para a API backend
+                .build();
     }
 
     public CouponResponseDTO createCupom(CouponResponseDTO couponResponseDTO){

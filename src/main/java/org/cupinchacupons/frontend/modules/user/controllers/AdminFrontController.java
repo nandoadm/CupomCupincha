@@ -2,7 +2,7 @@ package org.cupinchacupons.frontend.modules.user.controllers;
 
 
 import org.cupinchacupons.backend.modules.cupom.dto.CouponResponseDTO;
-import org.cupinchacupons.frontend.modules.user.usecase.CreateCupomFrontService;
+import org.cupinchacupons.frontend.modules.user.usecase.CreateCupomService;
 import org.cupinchacupons.frontend.modules.user.usecase.ListAllCoupunsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class AdminFrontController {
 
     @Autowired
-    private CreateCupomFrontService createCupomFrontService;
+    private CreateCupomService createCupomFrontService;
 
     @Autowired
     private ListAllCoupunsService listAllCoupunsService;

@@ -14,7 +14,16 @@ public class CreateCategoriaUseCase {
         this.categoriaRepository = categoriaRepository;
     }
 
-    public CategoriaEntity CreateCategoria(CategoriaEntity categoriaEntity) {
+    public CategoriaEntity createCategoria(CategoriaEntity categoriaEntity) {
+        // Verifica se já existe
+       var exists =  categoriaRepository.findAllByDescricaoContainingIgnoreCase(categoriaEntity.getDescricao());
+
+        if( !exists.isEmpty()){
+            throw new RuntimeException("Categoria ja existe");
+        }
+
+        // Salva caso não exista
         return this.categoriaRepository.save(categoriaEntity);
     }
 }
+
