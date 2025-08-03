@@ -35,10 +35,10 @@ public class CategoriaCotroller {
     }
 
     @GetMapping("/listarCategoria")
-    public ResponseEntity<String> listarCategoria(@RequestParam(required = false) String filter) {
+    public ResponseEntity<? extends Object> listarCategoria(@RequestParam(required = false) String filter) {
         try {
             List<CategoriaResponseDTO> result = listCategoriaUseCase.execute(filter);
-            return ResponseEntity.ok(result.toString());
+            return ResponseEntity.ok(result);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }

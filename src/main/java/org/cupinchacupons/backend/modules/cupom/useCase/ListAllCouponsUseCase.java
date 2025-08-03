@@ -18,19 +18,33 @@ public class ListAllCouponsUseCase {
         this.cupomRepository = cupomRepository;
     }
 
-    public List<CouponResponseDTO> listAllCoupons(String Filter){
+    public List<CouponResponseDTO> listAllCoupons(String Filter) {
 
-        List<CupomEntity> cupom = cupomRepository.findAllByTituloContainingIgnoreCase(Filter);
+        if (Filter == null || Filter.isEmpty()) {
+            List<CupomEntity> cupom =cupomRepository.findAll();
 
+            return cupom.stream().map(CupomResponse -> CouponResponseDTO.builder()
+                    .ativo(String.valueOf(CupomResponse.getAtivo()))
+                    .titulo(CupomResponse.getTitulo())
+                    .validade(String.valueOf(CupomResponse.getValidade()))
+                    .descricao(CupomResponse.getDescricao())
+                    .Codigo(CupomResponse.getCodigo())
+                    .categotiaDescricao(CupomResponse.getCategoria() != null ? CupomResponse.getCategoria().getDescricao() : null)
+                    .build()
+            ).collect(Collectors.toList());
+        } else {
 
-        return cupom.stream().map(CupomResponse -> CouponResponseDTO.builder()
-                .ativo(String.valueOf(CupomResponse.getAtivo()))
-                .titulo(CupomResponse.getTitulo())
-                .validade(String.valueOf(CupomResponse.getValidade()))
-                .descricao(CupomResponse.getDescricao())
-                .Codigo(CupomResponse.getCodigo())
-                .categotiaDescricao(CupomResponse.getCategoria() != null ? CupomResponse.getCategoria().getDescricao() : null)
-                .build()
-        ).collect(Collectors.toList());
+            List<CupomEntity> cupom = cupomRepository.findAllByTituloContainingIgnoreCase(Filter);
+
+            return cupom.stream().map(CupomResponse -> CouponResponseDTO.builder()
+                    .ativo(String.valueOf(CupomResponse.getAtivo()))
+                    .titulo(CupomResponse.getTitulo())
+                    .validade(String.valueOf(CupomResponse.getValidade()))
+                    .descricao(CupomResponse.getDescricao())
+                    .Codigo(CupomResponse.getCodigo())
+                    .categotiaDescricao(CupomResponse.getCategoria() != null ? CupomResponse.getCategoria().getDescricao() : null)
+                    .build()
+            ).collect(Collectors.toList());
+        }
     }
 }

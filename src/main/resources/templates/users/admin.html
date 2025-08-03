@@ -67,18 +67,17 @@
                 <input type="text" name="filter" placeholder="Buscar por título"
                        th:value="${filter}">
                 <select name="tipoFilter">
-                    <option value="Cupons">Cupons</option>
-                    <option value="Categorias">Categorias</option>
-                    <option value="Lojas">Lojas</option>
-                    <option value="Afiliados">Afiliados</option>
-                    <option value="Users">Users</option>
+                    <option value="Cupons" th:selected="${opcao == 'Cupons'}">Cupons</option>
+                    <option value="Categorias" th:selected="${opcao == 'Categorias'}">Categorias</option>
+                    <option value="Lojas" th:selected="${opcao == 'Lojas'}">Lojas</option>
+                    <option value="Afiliados" th:selected="${opcao == 'Afiliados'}">Afiliados</option>
+                    <option value="Users" th:selected="${opcao == 'Users'}">Users</option>
                 </select>
                 <button type="submit">Buscar</button>
             </form>
 
             <!-- Lista de cupons -->
-            <div th:if="${coupons != null}">
-                <p th:if="${#lists.isEmpty(coupons)}">Nenhum cupom encontrado</p>
+            <div>
                 <table th:if="${!#lists.isEmpty(coupons)}" border="1" cellpadding="5">
                     <thead>
                     <tr>
@@ -96,6 +95,20 @@
                         <td th:text="${c.validade}"></td>
                         <td th:text="${c.ativo == '1' ? 'Sim' : 'Não'}"></td>
                         <td th:text="${c.categotiaDescricao} ?: 'N/A'"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <table th:if="${!#lists.isEmpty(categoria)}" border="1" cellpadding="5">
+                    <thead>
+                    <tr>
+                        <th>Categoria</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="cat : ${categoria}">
+                        <td th:text="${cat.descricao}"></td>
                     </tr>
                     </tbody>
                 </table>

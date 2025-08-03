@@ -1,10 +1,9 @@
 package org.cupinchacupons.frontend.modules.user.controllers;
 
 
-import org.cupinchacupons.backend.modules.cupom.dto.CouponResponseDTO;
 import org.cupinchacupons.frontend.modules.user.usecase.CreateCupomService;
 import org.cupinchacupons.frontend.modules.user.usecase.ListAllCoupunsService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.cupinchacupons.frontend.modules.user.usecase.ListCategoriaService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,11 +16,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/admin")
 public class AdminFrontController {
 
-    @Autowired
-    private CreateCupomService createCupomFrontService;
+    private final CreateCupomService createCupomFrontService;
 
-    @Autowired
-    private ListAllCoupunsService listAllCoupunsService;
+    private final ListAllCoupunsService listAllCoupunsService;
+    private final ListCategoriaService listCategoriaService;
+
+    public AdminFrontController(CreateCupomService createCupomFrontService, ListAllCoupunsService listAllCoupunsService, ListCategoriaService listCategoriaService) {
+        this.createCupomFrontService = createCupomFrontService;
+        this.listAllCoupunsService = listAllCoupunsService;
+        this.listCategoriaService = listCategoriaService;
+    }
 
     @GetMapping("/")
     @PreAuthorize("hasRole('ADMIN')")
@@ -38,30 +42,58 @@ public class AdminFrontController {
         return "users/admin";
     }
 
-    @GetMapping("/create-cupom")
-    public CouponResponseDTO execute(CouponResponseDTO couponResponseDTO) {
-        var result = this.createCupomFrontService.createCupom(couponResponseDTO);
-        return result;
-    };
+//    @GetMapping("/create-cupom")
+//    public CouponResponseDTO execute(CouponResponseDTO couponResponseDTO) {
+//        var result = this.createCupomFrontService.createCupom(couponResponseDTO);
+//        return result;
+//    };
 
 
     @GetMapping("/posts")
     @PreAuthorize("hasRole('ADMIN')")
-    public String listarPosts(@RequestParam(required = false) String filter, Model model) {
+    public String listarPosts(
+            @RequestParam(required = false) String filter,
+            @RequestParam(required = false) String tipoFilter,
+            Model model) {
 
         model.addAttribute("secao", "posts");
+        model.addAttribute("filter", filter);
+        model.addAttribute("opcao", tipoFilter);
 
-        if (filter != null && !filter.isBlank()) {
-            var coupons = listAllCoupunsService.listCoupouns(filter);
-            model.addAttribute("coupons", coupons);
-        } else {
-            System.out.println("Filtro não informado, não buscar!");
+        if (tipoFilter == null || tipoFilter.isBlank()) {
+            tipoFilter = "Cupons"; // valor padrão se não for enviado
         }
 
-        System.out.println("Valor do filtro: " + filter);
+        switch (tipoFilter) {
+            case "Cupons":
+                if (filter != null && !filter.isBlank()) {
+                    var coupons = listAllCoupunsService.listCoupouns(filter);
+                    model.addAttribute("coupons", coupons);
+                } else {
+                    var all = listAllCoupunsService.listCoupouns(filter);
+                    model.addAttribute("coupons", all);
+                }
+                break;
+
+            case "Categorias":
+                if (filter != null && !filter.isBlank()) {
+                    var categoria = listCategoriaService.execute(filter);
+                    model.addAttribute("categoria", categoria);
+                } else {
+                    var allCategorias = listCategoriaService.execute(filter);
+                    model.addAttribute("categoria", allCategorias);
+                }
+                break;
+
+            // Adicione aqui os outros tipos: Lojas, Afiliados, Users...
+            default:
+                break;
+        }
+
         return "users/admin";
     }
 
 
-
 }
+
+
