@@ -42,7 +42,9 @@ public class SecurityConfig {
                     auth.requestMatchers(PUBLIC_URLS).permitAll()
                             .requestMatchers(SWAGGER_LIST).permitAll()
                             .requestMatchers("/admin/**").hasRole("ADMIN")
-                            .anyRequest().authenticated();
+//                            .anyRequest().authenticated();
+                            .anyRequest().permitAll();
+
                 })
                 .formLogin(auth -> auth.loginPage("/login/"));
 //                httpSecurity.addFilterBefore(securityUserFilter, UsernamePasswordAuthenticationFilter.class);
