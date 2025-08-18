@@ -31,6 +31,10 @@ public class CategoriaEntity {
     @CreationTimestamp
     private LocalDateTime createdAt;
 
+    @NotNull
+    @Column(name = "slug")
+    private String slug;
+
     @OneToMany(mappedBy = "categoria")
     private Set<CupomEntity> cupoms = new LinkedHashSet<>();
 

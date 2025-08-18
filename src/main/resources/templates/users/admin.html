@@ -113,6 +113,23 @@
                     </tbody>
                 </table>
             </div>
+
+            <div>
+                <table th:if="${!#lists.isEmpty(loja)}" border="1" cellpadding="5">
+                    <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Url</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="l : ${loja}">
+                        <td th:text="${l.nome}"></td>
+                        <td th:text="${l.url}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
         <!-- Outras seções -->

@@ -31,6 +31,10 @@ public class LojaEntity {
     @Column(name = "url")
     private String url;
 
+    @NotNull
+    @Column(name = "slug")
+    private String slug;
+
     @Column(name = "created_at")
     @CreationTimestamp
     private LocalDateTime createdAt;

@@ -36,6 +36,10 @@ public class CupomEntity {
     @Column(name = "validade", nullable = false)
     private LocalDateTime validade;
 
+    @NotNull
+    @Column(name = "slug")
+    private String slug;
+
 //    @Column(name = "desconto", precision = 10, scale = 2)
 //    private BigDecimal desconto;
 

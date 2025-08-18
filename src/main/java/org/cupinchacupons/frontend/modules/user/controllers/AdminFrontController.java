@@ -4,6 +4,7 @@ package org.cupinchacupons.frontend.modules.user.controllers;
 import org.cupinchacupons.frontend.modules.user.usecase.CreateCupomService;
 import org.cupinchacupons.frontend.modules.user.usecase.ListAllCoupunsService;
 import org.cupinchacupons.frontend.modules.user.usecase.ListCategoriaService;
+import org.cupinchacupons.frontend.modules.user.usecase.ListStoreService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,12 +20,15 @@ public class AdminFrontController {
     private final CreateCupomService createCupomFrontService;
 
     private final ListAllCoupunsService listAllCoupunsService;
+
     private final ListCategoriaService listCategoriaService;
 
-    public AdminFrontController(CreateCupomService createCupomFrontService, ListAllCoupunsService listAllCoupunsService, ListCategoriaService listCategoriaService) {
+    private final ListStoreService listStoreService;
+    public AdminFrontController(CreateCupomService createCupomFrontService, ListAllCoupunsService listAllCoupunsService, ListCategoriaService listCategoriaService, ListStoreService listStoreService) {
         this.createCupomFrontService = createCupomFrontService;
         this.listAllCoupunsService = listAllCoupunsService;
         this.listCategoriaService = listCategoriaService;
+        this.listStoreService = listStoreService;
     }
 
     @GetMapping("/")
@@ -85,6 +89,15 @@ public class AdminFrontController {
                 }
                 break;
 
+            case "Lojas":
+                if(filter != null && !filter.isBlank()){
+                    var lojas = listStoreService.execute(filter);
+                    model.addAttribute("loja", lojas);
+                } else {
+                    var allLojas = listStoreService.execute(filter);
+                    model.addAttribute("loja", allLojas);
+                }
+                break;
             // Adicione aqui os outros tipos: Lojas, Afiliados, Users...
             default:
                 break;

@@ -17,16 +17,20 @@ public class CreateCupomService {
                 .build();
     }
 
-    public CouponResponseDTO createCupom(CouponResponseDTO couponResponseDTO){
-        var result = webClient.post()
-                .uri("http://localhost:8080/api/cupom")
+    public CouponResponseDTO createCupom(CouponResponseDTO couponResponseDTO) {
+        CouponResponseDTO result = webClient.post()
+                .uri("/api/cupom")
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(couponResponseDTO)
                 .retrieve()
-                .bodyToMono(couponResponseDTO.getClass())
+                .bodyToMono(CouponResponseDTO.class)
                 .block();
 
-        System.out.println("Retorno do cupom" + result);
+        if (result == null) {
+            throw new RuntimeException("Erro ao criar cupom");
+        }
+
+        System.out.println("Retorno do cupom: " + result);
         return result;
     }
 
