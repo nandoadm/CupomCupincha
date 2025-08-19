@@ -1,4 +1,4 @@
-package org.cupinchacupons.frontend.modules.user.usecase;
+package org.cupinchacupons.frontend.modules.admin.loja.service;
 
 
 import org.cupinchacupons.backend.modules.loja.dto.StoreResponseDTO;

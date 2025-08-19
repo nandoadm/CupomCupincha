@@ -1,10 +1,11 @@
-package org.cupinchacupons.frontend.modules.user.controllers;
+package org.cupinchacupons.frontend.modules.admin.controllers;
 
 
-import org.cupinchacupons.frontend.modules.user.usecase.CreateCupomService;
-import org.cupinchacupons.frontend.modules.user.usecase.ListAllCoupunsService;
-import org.cupinchacupons.frontend.modules.user.usecase.ListCategoriaService;
-import org.cupinchacupons.frontend.modules.user.usecase.ListStoreService;
+import org.cupinchacupons.frontend.modules.admin.afiliado.service.ListAfiliadoService;
+import org.cupinchacupons.frontend.modules.admin.categoria.service.ListCategoriaService;
+import org.cupinchacupons.frontend.modules.admin.cupom.service.CreateCupomService;
+import org.cupinchacupons.frontend.modules.admin.cupom.service.ListAllCoupunsService;
+import org.cupinchacupons.frontend.modules.admin.loja.service.ListStoreService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,11 +24,14 @@ public class AdminFrontController {
 
     private final ListCategoriaService listCategoriaService;
 
+    private final ListAfiliadoService listAfiliadoService;
+
     private final ListStoreService listStoreService;
-    public AdminFrontController(CreateCupomService createCupomFrontService, ListAllCoupunsService listAllCoupunsService, ListCategoriaService listCategoriaService, ListStoreService listStoreService) {
+    public AdminFrontController(CreateCupomService createCupomFrontService, ListAllCoupunsService listAllCoupunsService, ListCategoriaService listCategoriaService, ListAfiliadoService listAfiliadoService, ListStoreService listStoreService) {
         this.createCupomFrontService = createCupomFrontService;
         this.listAllCoupunsService = listAllCoupunsService;
         this.listCategoriaService = listCategoriaService;
+        this.listAfiliadoService = listAfiliadoService;
         this.listStoreService = listStoreService;
     }
 
@@ -70,33 +74,23 @@ public class AdminFrontController {
 
         switch (tipoFilter) {
             case "Cupons":
-                if (filter != null && !filter.isBlank()) {
-                    var coupons = listAllCoupunsService.listCoupouns(filter);
-                    model.addAttribute("coupons", coupons);
-                } else {
-                    var all = listAllCoupunsService.listCoupouns(filter);
-                    model.addAttribute("coupons", all);
-                }
+                var coupons = listAllCoupunsService.listCoupouns(filter);
+                model.addAttribute("coupons", coupons);
                 break;
 
             case "Categorias":
-                if (filter != null && !filter.isBlank()) {
-                    var categoria = listCategoriaService.execute(filter);
-                    model.addAttribute("categoria", categoria);
-                } else {
-                    var allCategorias = listCategoriaService.execute(filter);
-                    model.addAttribute("categoria", allCategorias);
-                }
+                var allCategorias = listCategoriaService.execute(filter);
+                model.addAttribute("categoria", allCategorias);
                 break;
 
             case "Lojas":
-                if(filter != null && !filter.isBlank()){
-                    var lojas = listStoreService.execute(filter);
-                    model.addAttribute("loja", lojas);
-                } else {
-                    var allLojas = listStoreService.execute(filter);
-                    model.addAttribute("loja", allLojas);
-                }
+                var allLojas = listStoreService.execute(filter);
+                model.addAttribute("loja", allLojas);
+                break;
+
+            case "Afiliados":
+                var allAfiliados = listAfiliadoService.listAfiliados(filter);
+                model.addAttribute("afiliado", allAfiliados);
                 break;
             // Adicione aqui os outros tipos: Lojas, Afiliados, Users...
             default:
@@ -108,5 +102,3 @@ public class AdminFrontController {
 
 
 }
-
-

@@ -130,6 +130,25 @@
                     </tbody>
                 </table>
             </div>
+
+            <div>
+                <table th:if="${!#lists.isEmpty(afiliado)}" border="1" cellpadding="5">
+                    <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>CNPJ</th>
+                        <th>Data de cadastro</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="a : ${afiliado}">
+                        <td th:text="${a.nome}"></td>
+                        <td th:text="${a.cnpj}"></td>
+                        <td th:text="${a.createdAt}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
         <!-- Outras seções -->

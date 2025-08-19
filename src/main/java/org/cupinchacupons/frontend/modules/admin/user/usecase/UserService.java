@@ -1,7 +1,7 @@
-package org.cupinchacupons.frontend.modules.user.usecase;
+package org.cupinchacupons.frontend.modules.admin.user.usecase;
 
 import org.cupinchacupons.backend.modules.user.dto.AuthUserRequestDTO;
-import org.cupinchacupons.frontend.modules.user.dto.TokenDTO;
+import org.cupinchacupons.frontend.modules.admin.user.dto.TokenDTO;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;

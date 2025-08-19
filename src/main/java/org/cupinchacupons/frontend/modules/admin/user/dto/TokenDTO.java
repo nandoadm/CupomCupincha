@@ -1,4 +1,4 @@
-package org.cupinchacupons.frontend.modules.user.dto;
+package org.cupinchacupons.frontend.modules.admin.user.dto;
 
 import lombok.Data;
 

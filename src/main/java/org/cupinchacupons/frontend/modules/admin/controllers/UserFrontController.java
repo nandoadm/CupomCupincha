@@ -1,7 +1,7 @@
-package org.cupinchacupons.frontend.modules.user.controllers;
+package org.cupinchacupons.frontend.modules.admin.controllers;
 
 import jakarta.servlet.http.HttpSession;
-import org.cupinchacupons.frontend.modules.user.usecase.UserService;
+import org.cupinchacupons.frontend.modules.admin.user.usecase.UserService;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
