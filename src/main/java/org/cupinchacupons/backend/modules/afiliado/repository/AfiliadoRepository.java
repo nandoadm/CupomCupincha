@@ -11,4 +11,5 @@ public interface AfiliadoRepository extends JpaRepository<AfiliadoEntity, UUID> 
     Optional<AfiliadoEntity> findByCnpj(String cnpj);
 
     List<AfiliadoEntity> findAllByNomeContainingIgnoreCase(String nome);
+
 }

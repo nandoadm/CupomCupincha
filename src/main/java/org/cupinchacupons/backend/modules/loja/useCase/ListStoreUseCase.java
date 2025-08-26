@@ -1,6 +1,5 @@
 package org.cupinchacupons.backend.modules.loja.useCase;
 
-
 import org.cupinchacupons.backend.modules.entity.LojaEntity;
 import org.cupinchacupons.backend.modules.loja.dto.StoreResponseDTO;
 import org.cupinchacupons.backend.modules.loja.repository.LojaRepository;
@@ -29,10 +28,13 @@ public class ListStoreUseCase {
             lojas = this.lojaRepository.findByNomeContainingIgnoreCase(filtro);
         }
 
+        System.out.println("Retorno das lojas" + lojas);
+
         return lojas.stream()
                 .sorted(Comparator.comparing(LojaEntity::getNome))
                 .map(loja ->
                         StoreResponseDTO.builder()
+                                .id(loja.getId())
                                 .nome(loja.getNome())
                                 .url(loja.getUrl())
                                 .build())

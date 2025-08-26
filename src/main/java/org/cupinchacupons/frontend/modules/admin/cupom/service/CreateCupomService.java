@@ -1,6 +1,6 @@
 package org.cupinchacupons.frontend.modules.admin.cupom.service;
 
-
+import org.cupinchacupons.backend.modules.cupom.dto.CouponRequestDTO;
 import org.cupinchacupons.backend.modules.cupom.dto.CouponResponseDTO;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -13,15 +13,15 @@ public class CreateCupomService {
 
     public CreateCupomService(WebClient.Builder builder) {
         this.webClient = builder
-                .baseUrl("http://localhost:8080") // sempre aponta para a API backend
+                .baseUrl("http://localhost:8080") // URL do backend
                 .build();
     }
 
-    public CouponResponseDTO createCupom(CouponResponseDTO couponResponseDTO) {
+    public CouponResponseDTO createCupom(CouponRequestDTO dto) {
         CouponResponseDTO result = webClient.post()
-                .uri("/api/cupom")
+                .uri("/api/create-cupom")
                 .contentType(MediaType.APPLICATION_JSON)
-                .bodyValue(couponResponseDTO)
+                .bodyValue(dto)
                 .retrieve()
                 .bodyToMono(CouponResponseDTO.class)
                 .block();
@@ -30,8 +30,7 @@ public class CreateCupomService {
             throw new RuntimeException("Erro ao criar cupom");
         }
 
-        System.out.println("Retorno do cupom: " + result);
+        System.out.println("Cupom criado: " + result);
         return result;
     }
-
 }

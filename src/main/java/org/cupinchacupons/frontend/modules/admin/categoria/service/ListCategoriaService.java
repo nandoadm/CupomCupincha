@@ -18,7 +18,7 @@ public class ListCategoriaService {
                 .build();
     }
 
-    public List<CategoriaResponseDTO> execute(String descricao){
+    public List<CategoriaResponseDTO> listCategoria(String descricao){
         var result = webClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .path("/api/listarCategoria")

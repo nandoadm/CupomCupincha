@@ -3,8 +3,7 @@ package org.cupinchacupons.backend.modules.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
@@ -14,6 +13,9 @@ import java.util.UUID;
 @Setter
 @Entity
 @Table(name = "cupom", schema = "public")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class CupomEntity {
 
     @Id
@@ -40,8 +42,8 @@ public class CupomEntity {
     @Column(name = "slug")
     private String slug;
 
-//    @Column(name = "desconto", precision = 10, scale = 2)
-//    private BigDecimal desconto;
+    @Column(name = "desconto")
+    private String desconto;
 
     @Size(max = 255)
     @Column(name = "restricoes")

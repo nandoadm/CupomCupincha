@@ -101,3 +101,132 @@ ul li.item-menu a:hover {
     font-size: 35px;
     cursor: pointer;
 }
+
+/* ===== CONTEÚDO PRINCIPAL ===== */
+#conteudo-principal {
+    margin-left: 80px; /* acompanha largura inicial do menu */
+    padding: 20px;
+    transition: margin-left 1.0s ease-in-out;
+}
+
+nav.menu-lateral.expandido ~ #conteudo-principal {
+    margin-left: 230px; /* acompanha expansão */
+}
+
+/* ===== TÍTULOS ===== */
+#conteudo-principal h1 {
+    font-size: 26px;
+    margin-bottom: 15px;
+    color: #c6006d;
+}
+
+#conteudo-principal p {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* ===== FORMULÁRIOS ===== */
+form {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+form input[type="text"],
+form input[type="date"],
+form select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+form input:focus,
+form select:focus {
+    border-color: #c6006d;
+}
+
+form button {
+    background: linear-gradient(to right, #c6006d, #dc5186);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 18px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: bold;
+}
+
+form button:hover {
+    background: #e74d8b;
+}
+
+/* ===== TABELAS ===== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 25px;
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+table th, table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background: #f7f7f7;
+    font-weight: bold;
+    color: #444;
+}
+
+table tr:hover {
+    background: #fdf1f7;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 768px) {
+    nav.menu-lateral.expandido {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    #conteudo-principal {
+        margin-left: 0 !important;
+        padding: 15px;
+    }
+
+    form {
+        flex-direction: column;
+    }
+
+    table, thead, tbody, th, td, tr {
+        display: block;
+        width: 100%;
+    }
+
+    table tr {
+        margin-bottom: 15px;
+        border: 1px solid #eee;
+        border-radius: 6px;
+        padding: 10px;
+    }
+
+    table td {
+        border: none;
+        padding: 8px 0;
+    }
+
+    table th {
+        display: none;
+    }
+}
+

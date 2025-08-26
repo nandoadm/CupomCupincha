@@ -30,6 +30,7 @@ public class ListAllAfiliadoUseCase {
                 .sorted(Comparator.comparing(afiliado -> afiliado.getNome().toLowerCase()))
                 .map(afiliado -> {
                     return AfiliadoResponseDTO.builder()
+                            .id(afiliado.getId())
                             .nome(afiliado.getNome())
                             .cnpj(afiliado.getCnpj())
                             .createdAt(afiliado.getCreatedAt().toString())

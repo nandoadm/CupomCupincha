@@ -1,27 +1,31 @@
 package org.cupinchacupons.backend.modules.cupom.dto;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Timestamp;
+import java.util.UUID;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class CouponRequestDTO {
 
-    private Integer ativo;
-    private String codigo;
-    private String desconto;
-    private String restricoes;
-    private Timestamp validade;
-    private String descricao;
-    private String slug;
     private String titulo;
+    private String descricao;
+    private String codigo;
+    private String validade;
+    private String ativo;
+    private String restricoes;
+    private String slug;
+    private String desconto;
+    private String categoriaDescricao;
+    private String afiliadoNome;
+    private String lojaNome;
 
-
+    private UUID categoriaId;
+    private UUID afiliadoId;
+    private UUID lojaId;
 }

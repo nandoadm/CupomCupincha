@@ -29,7 +29,10 @@ public class ListAllCouponsUseCase {
                     .validade(String.valueOf(CupomResponse.getValidade()))
                     .descricao(CupomResponse.getDescricao())
                     .Codigo(CupomResponse.getCodigo())
-                    .categotiaDescricao(CupomResponse.getCategoria() != null ? CupomResponse.getCategoria().getDescricao() : null)
+                    .slug(CupomResponse.getSlug())
+                    .afiliadoNome(CupomResponse.getAfiliado() != null ? CupomResponse.getAfiliado().getNome() : null)
+                    .lojaNome(CupomResponse.getLoja() != null ? CupomResponse.getLoja().getNome() : null)
+                    .categoriaDescricao(CupomResponse.getCategoria() != null ? CupomResponse.getCategoria().getDescricao() : null)
                     .build()
             ).collect(Collectors.toList());
         } else {
@@ -42,7 +45,7 @@ public class ListAllCouponsUseCase {
                     .validade(String.valueOf(CupomResponse.getValidade()))
                     .descricao(CupomResponse.getDescricao())
                     .Codigo(CupomResponse.getCodigo())
-                    .categotiaDescricao(CupomResponse.getCategoria() != null ? CupomResponse.getCategoria().getDescricao() : null)
+                    .categoriaDescricao(CupomResponse.getCategoria() != null ? CupomResponse.getCategoria().getDescricao() : null)
                     .build()
             ).collect(Collectors.toList());
         }

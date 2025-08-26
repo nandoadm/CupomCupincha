@@ -26,7 +26,7 @@ public class CupomControlller {
     }
 
 
-    @PostMapping("/cupom")
+    @PostMapping("/create-cupom")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Object> create(@RequestBody CouponRequestDTO couponRequestDTO) {
         try {

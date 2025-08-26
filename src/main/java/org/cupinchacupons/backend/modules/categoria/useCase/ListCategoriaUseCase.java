@@ -33,6 +33,7 @@ public class ListCategoriaUseCase {
                 )
                 .map(categoria ->
                         CategoriaResponseDTO.builder()
+                                .id(categoria.getId())
                                 .descricao(categoria.getDescricao())
                                 .build()
                 )

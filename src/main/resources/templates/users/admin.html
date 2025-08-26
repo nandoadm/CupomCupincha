@@ -29,7 +29,7 @@
             </a>
         </li>
         <li class="item-menu">
-            <a th:href="@{/admin/criar-cupom}">
+            <a th:href="@{/admin/create-cupom}">
                 <span class="icon"><i class="bi bi-ticket-perforated"></i></span>
                 <span class="txt-link">Criar Cupons</span>
             </a>
@@ -71,7 +71,7 @@
                     <option value="Categorias" th:selected="${opcao == 'Categorias'}">Categorias</option>
                     <option value="Lojas" th:selected="${opcao == 'Lojas'}">Lojas</option>
                     <option value="Afiliados" th:selected="${opcao == 'Afiliados'}">Afiliados</option>
-                    <option value="Users" th:selected="${opcao == 'Users'}">Users</option>
+                    <!--                    <option value="Users" th:selected="${opcao == 'Users'}">Users</option>-->
                 </select>
                 <button type="submit">Buscar</button>
             </form>
@@ -85,7 +85,10 @@
                         <th>Código</th>
                         <th>Validade</th>
                         <th>Ativo</th>
+                        <th>Slug</th>
                         <th>Categoria</th>
+                        <th>Afiliado</th>
+                        <th>Loja</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -94,7 +97,10 @@
                         <td th:text="${c.codigo}"></td>
                         <td th:text="${c.validade}"></td>
                         <td th:text="${c.ativo == '1' ? 'Sim' : 'Não'}"></td>
-                        <td th:text="${c.categotiaDescricao} ?: 'N/A'"></td>
+                        <td th:text="${c.slug}"></td>
+                        <td th:text="${c.categoriaDescricao}"></td>
+                        <td th:text="${c.afiliadoNome}"></td>
+                        <td th:text="${c.lojaNome}"></td>
                     </tr>
                     </tbody>
                 </table>
@@ -152,31 +158,38 @@
         </div>
 
         <!-- Outras seções -->
-        <div th:case="'criar-cupom'">
+        <div th:case="'create-cupom'">
             <h1>Cadastro de Cupom</h1>
-            <form th:action="@{/admin/create-cupom}">
-                <label for="titulo">Titulo</label>
-                <input type="text" id="titulo" name="titulo">
+            <form th:action="@{/admin/create-cupom}" th:object="${cupom}" method="post">
+                <input type="text" name="titulo" placeholder="Título" required/>
+                <input type="text" name="descricao" placeholder="Descrição" required/>
+                <input type="text" name="codigo" placeholder="Código" required/>
+                <input type="text" name="slug" placeholder="Slug" required/>
+                <input type="text" name="desconto" placeholder="Desconto" required/>
+                <input type="text" name="restricao" placeholder="Restrição" required/>
+                <input type="date" name="validade" required/>
 
-                <label for="descricao">Descricao</label>
-                <input type="text" id="descricao" name="descricao">
-
-                <label for="ativo">Ativo</label>
-                <select id="ativo" name="ativo" required>
+                <select name="ativo" required>
                     <option value="0">Não</option>
                     <option value="1">Sim</option>
                 </select>
 
-                <label for="codigo">Código</label>
-                <input type="text" id="codigo" name="codigo" required>
+                <select name="categoriaId" required>
+                    <option value="">Categoria</option>
+                    <option th:each="c : ${categorias}" th:value="${c.id}" th:text="${c.descricao}"></option>
+                </select>
 
-                <label for="restricoes">Restrições</label>
-                <textarea id="restricoes" name="restricoes" rows="4"></textarea>
+                <select name="afiliadoId" required>
+                    <option value="">Afiliado</option>
+                    <option th:each="a : ${afiliados}" th:value="${a.id}" th:text="${a.nome}"></option>
+                </select>
 
-                <label for="validade">Validade</label>
-                <input type="date" id="validade" name="validade" required>
+                <select name="lojaId" required>
+                    <option value="">Loja</option>
+                    <option th:each="l : ${lojas}" th:value="${l.id}" th:text="${l.nome}"></option>
+                </select>
 
-                <button type="submit">Salvar</button>
+                <button type="submit">Cadastrar</button>
             </form>
         </div>
 
