@@ -6,6 +6,7 @@ import org.cupinchacupons.backend.modules.cupom.repository.CupomRepository;
 import org.cupinchacupons.backend.modules.entity.CupomEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,35 +20,33 @@ public class ListAllCouponsUseCase {
     }
 
     public List<CouponResponseDTO> listAllCoupons(String Filter) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
-        if (Filter == null || Filter.isEmpty()) {
-            List<CupomEntity> cupom =cupomRepository.findAll();
+        List<CupomEntity> cupom = (Filter == null || Filter.isEmpty())
+                ? cupomRepository.findAll()
+                : cupomRepository.findAllByTituloContainingIgnoreCase(Filter);
 
-            return cupom.stream().map(CupomResponse -> CouponResponseDTO.builder()
-                    .ativo(String.valueOf(CupomResponse.getAtivo()))
-                    .titulo(CupomResponse.getTitulo())
-                    .validade(String.valueOf(CupomResponse.getValidade()))
-                    .descricao(CupomResponse.getDescricao())
-                    .Codigo(CupomResponse.getCodigo())
-                    .slug(CupomResponse.getSlug())
-                    .afiliadoNome(CupomResponse.getAfiliado() != null ? CupomResponse.getAfiliado().getNome() : null)
-                    .lojaNome(CupomResponse.getLoja() != null ? CupomResponse.getLoja().getNome() : null)
-                    .categoriaDescricao(CupomResponse.getCategoria() != null ? CupomResponse.getCategoria().getDescricao() : null)
-                    .build()
-            ).collect(Collectors.toList());
-        } else {
-
-            List<CupomEntity> cupom = cupomRepository.findAllByTituloContainingIgnoreCase(Filter);
-
-            return cupom.stream().map(CupomResponse -> CouponResponseDTO.builder()
-                    .ativo(String.valueOf(CupomResponse.getAtivo()))
-                    .titulo(CupomResponse.getTitulo())
-                    .validade(String.valueOf(CupomResponse.getValidade()))
-                    .descricao(CupomResponse.getDescricao())
-                    .Codigo(CupomResponse.getCodigo())
-                    .categoriaDescricao(CupomResponse.getCategoria() != null ? CupomResponse.getCategoria().getDescricao() : null)
-                    .build()
-            ).collect(Collectors.toList());
-        }
+        return cupom.stream().map(CupomResponse -> CouponResponseDTO.builder()
+                .id(CupomResponse.getId())
+                .ativo(String.valueOf(CupomResponse.getAtivo()))
+                .titulo(CupomResponse.getTitulo())
+                .validade(CupomResponse.getValidade() != null ? CupomResponse.getValidade().toString() : null)
+                .descricao(CupomResponse.getDescricao())
+                .Codigo(CupomResponse.getCodigo())
+                .slug(CupomResponse.getSlug())
+                .createdAt(CupomResponse.getCreated_At() != null
+                        ? CupomResponse.getCreated_At().format(formatter)
+                        : null)
+                .afiliadoNome(CupomResponse.getAfiliado() != null
+                        ? CupomResponse.getAfiliado().getNome()
+                        : null)
+                .lojaNome(CupomResponse.getLoja() != null
+                        ? CupomResponse.getLoja().getNome()
+                        : null)
+                .categoriaDescricao(CupomResponse.getCategoria() != null
+                        ? CupomResponse.getCategoria().getDescricao()
+                        : null)
+                .build()
+        ).collect(Collectors.toList());
     }
 }

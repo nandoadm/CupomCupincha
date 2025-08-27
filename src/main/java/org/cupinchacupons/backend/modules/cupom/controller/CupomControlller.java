@@ -39,7 +39,7 @@ public class CupomControlller {
 
     @GetMapping("/listar")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<? extends Object> listarCupons(@RequestParam String filtro) {
+    public ResponseEntity<Object> listarCupons(@RequestParam String filtro) {
         try {
         List<CouponResponseDTO> result = listAllCouponsUseCase.listAllCoupons(filtro);
         return ResponseEntity.ok().body(result);

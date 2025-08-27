@@ -52,6 +52,7 @@ public class CreateCupomUseCase {
                 .ativo(Integer.parseInt(dto.getAtivo()))
                 .restricoes(dto.getRestricoes())
                 .slug(dto.getSlug())
+                .desconto(dto.getDesconto())
                 .categoria(categoria)
                 .afiliado(afiliado)
                 .loja(loja)
@@ -67,9 +68,11 @@ public class CreateCupomUseCase {
                 .validade(saved.getValidade().toString())
                 .ativo(String.valueOf(saved.getAtivo()))
                 .slug(saved.getSlug())
+                .createdAt(saved.getCreated_At().toString())
                 .categoriaDescricao(saved.getCategoria().getDescricao())
                 .afiliadoNome(saved.getAfiliado().getNome())
                 .lojaNome(saved.getLoja().getNome())
+                .createdAt(saved.getCreated_At().toString())
                 .build();
     }
 }

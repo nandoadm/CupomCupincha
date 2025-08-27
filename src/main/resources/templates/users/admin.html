@@ -86,9 +86,11 @@
                         <th>Validade</th>
                         <th>Ativo</th>
                         <th>Slug</th>
+                        <th>Descrição</th>
                         <th>Categoria</th>
                         <th>Afiliado</th>
                         <th>Loja</th>
+                        <th>Data de cadastro</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -98,9 +100,11 @@
                         <td th:text="${c.validade}"></td>
                         <td th:text="${c.ativo == '1' ? 'Sim' : 'Não'}"></td>
                         <td th:text="${c.slug}"></td>
+                        <td th:text="${c.descricao}"></td>
                         <td th:text="${c.categoriaDescricao}"></td>
                         <td th:text="${c.afiliadoNome}"></td>
                         <td th:text="${c.lojaNome}"></td>
+                        <td th:text="${c.createdAt}"></td>
                     </tr>
                     </tbody>
                 </table>
