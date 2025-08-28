@@ -13,17 +13,17 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Service
-public class CreateCupomUseCase {
+public class CreateCouponUseCase {
 
     private final CupomRepository cupomRepository;
     private final CategoriaRepository categoriaRepository;
     private final AfiliadoRepository afiliadoRepository;
     private final LojaRepository lojaRepository;
 
-    public CreateCupomUseCase(CupomRepository cupomRepository,
-                              CategoriaRepository categoriaRepository,
-                              AfiliadoRepository afiliadoRepository,
-                              LojaRepository lojaRepository) {
+    public CreateCouponUseCase(CupomRepository cupomRepository,
+                               CategoriaRepository categoriaRepository,
+                               AfiliadoRepository afiliadoRepository,
+                               LojaRepository lojaRepository) {
         this.cupomRepository = cupomRepository;
         this.categoriaRepository = categoriaRepository;
         this.afiliadoRepository = afiliadoRepository;

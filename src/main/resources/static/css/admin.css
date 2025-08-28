@@ -8,10 +8,6 @@ body {
     height: 100vh;
 }
 
-.cabecalho {
-    /*height: 60px;*/
-    /*background: linear-gradient(to right, #c6006d, #dc5186);*/
-}
 
 nav.menu-lateral {
     width: 80px;
@@ -109,6 +105,7 @@ ul li.item-menu a:hover {
     transition: margin-left 1.0s ease-in-out;
 }
 
+
 nav.menu-lateral.expandido ~ #conteudo-principal {
     margin-left: 230px; /* acompanha expansão */
 }
@@ -119,6 +116,7 @@ nav.menu-lateral.expandido ~ #conteudo-principal {
     margin-bottom: 15px;
     color: #c6006d;
 }
+
 
 #conteudo-principal p {
     margin-bottom: 20px;
@@ -169,7 +167,7 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 25px;
-    box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     background: white;
     border-radius: 8px;
     overflow: hidden;

@@ -75,6 +75,7 @@
                 </select>
                 <button type="submit">Buscar</button>
             </form>
+                <p class="message-error" th:text="${message_error}" th:if="${filter_error}"></p>
 
             <!-- Lista de cupons -->
             <div>
@@ -195,6 +196,44 @@
 
                 <button type="submit">Cadastrar</button>
             </form>
+
+            <div th:if="${lastCoupon != null}">
+                <p th:text="${message_created}" th:if="${message_created}"></p>
+                <div th:if="${coupon_error}">
+                    <p>Erro ao criar cupom!</p>
+                </div>
+                <table border="1" cellpadding="5">
+                    <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>Código</th>
+                        <th>Validade</th>
+                        <th>Ativo</th>
+                        <th>Slug</th>
+                        <th>Descrição</th>
+                        <th>Categoria</th>
+                        <th>Afiliado</th>
+                        <th>Loja</th>
+                        <th>Data de cadastro</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td th:text="${lastCoupon.titulo}"></td>
+                        <td th:text="${lastCoupon.codigo}"></td>
+                        <td th:text="${lastCoupon.validade}"></td>
+                        <td th:text="${lastCoupon.ativo == '1' ? 'Sim' : 'Não'}"></td>
+                        <td th:text="${lastCoupon.slug}"></td>
+                        <td th:text="${lastCoupon.descricao}"></td>
+                        <td th:text="${lastCoupon.categoriaDescricao}"></td>
+                        <td th:text="${lastCoupon.afiliadoNome}"></td>
+                        <td th:text="${lastCoupon.lojaNome}"></td>
+                        <td th:text="${lastCoupon.createdAt}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
         </div>
 
         <div th:case="'categorias'">
@@ -214,6 +253,5 @@
     </div>
 </main>
 
-<script src="/js/menu.js"></script>
 </body>
 </html>

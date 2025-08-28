@@ -8,11 +8,13 @@ import org.cupinchacupons.frontend.modules.admin.afiliado.service.ListAfiliadoSe
 import org.cupinchacupons.frontend.modules.admin.categoria.service.ListCategoriaService;
 import org.cupinchacupons.frontend.modules.admin.cupom.service.CreateCupomService;
 import org.cupinchacupons.frontend.modules.admin.cupom.service.ListAllCoupunsService;
+import org.cupinchacupons.frontend.modules.admin.cupom.service.ListFinalCouponService;
 import org.cupinchacupons.frontend.modules.admin.loja.service.ListStoreService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/admin")
@@ -26,6 +28,7 @@ public class AdminFrontController {
     private final CategoriaRepository categoriaRepository;
     private final AfiliadoRepository afiliadoRepository;
     private final LojaRepository lojaRepository;
+    private final ListFinalCouponService listFinalCouponService;
 
     public AdminFrontController(
             CreateCupomService createCupomFrontService,
@@ -35,7 +38,7 @@ public class AdminFrontController {
             ListStoreService listStoreService,
             CategoriaRepository categoriaRepository,
             AfiliadoRepository afiliadoRepository,
-            LojaRepository lojaRepository
+            LojaRepository lojaRepository, ListFinalCouponService listFinalCouponService
     ) {
         this.createCupomFrontService = createCupomFrontService;
         this.listAllCoupunsService = listAllCoupunsService;
@@ -45,6 +48,7 @@ public class AdminFrontController {
         this.categoriaRepository = categoriaRepository;
         this.afiliadoRepository = afiliadoRepository;
         this.lojaRepository = lojaRepository;
+        this.listFinalCouponService = listFinalCouponService;
     }
 
     @GetMapping("/")
@@ -65,7 +69,8 @@ public class AdminFrontController {
     public String listarPosts(
             @RequestParam(required = false) String filter,
             @RequestParam(required = false) String tipoFilter,
-            Model model
+            Model model,
+            RedirectAttributes redirectAttributes
     ) {
         model.addAttribute("secao", "posts");
 
@@ -79,16 +84,39 @@ public class AdminFrontController {
 
         switch (tipoFilter) {
             case "Cupons":
-                model.addAttribute("coupons", listAllCoupunsService.listCoupouns(filter));
+                var coupons = listAllCoupunsService.listCoupouns(filter);
+                model.addAttribute("coupons", coupons);
+
+                if (coupons.isEmpty()) {
+                    model.addAttribute("filter_error", true);
+                    model.addAttribute("message_error", "Nenhum cupom encontrado com o filtro '" + filter + "'");
+                }
+
                 break;
             case "Categorias":
-                model.addAttribute("categoria", listCategoriaService.listCategoria(filter));
+                var categorias = listCategoriaService.listCategoria(filter);
+                model.addAttribute("categorias", categorias);
+                if (categorias.isEmpty()) {
+                    model.addAttribute("filter_error", true);
+                    model.addAttribute("message_error", "Nenhuma categoria encontrado com o filtro '" + filter + "'");
+                }
                 break;
             case "Lojas":
-                model.addAttribute("loja", listStoreService.execute(filter));
+                var lojas = listStoreService.execute(filter);
+                model.addAttribute("lojas", lojas);
+                if (lojas.isEmpty()) {
+                    model.addAttribute("filter_error", true);
+                    model.addAttribute("message_error", "Nenhuma loja encontrado com o filtro '" + filter + "'");
+                }
+
                 break;
             case "Afiliados":
-                model.addAttribute("afiliado", listAfiliadoService.listAfiliados(filter));
+                var afiliados = listAfiliadoService.listAfiliados(filter);
+                model.addAttribute("afiliados", afiliados);
+                if (afiliados.isEmpty()) {
+                    model.addAttribute("filter_error", true);
+                    model.addAttribute("message_error", "Nenhum afiliado encontrado com o filtro '" + filter + "'");
+                }
                 break;
             default:
                 break;
@@ -111,10 +139,23 @@ public class AdminFrontController {
 
     @PostMapping("/create-cupom")
     @PreAuthorize("hasRole('ADMIN')")
-    public String saveCoupon(@ModelAttribute CouponRequestDTO couponRequestDTO) {
-        createCupomFrontService.createCupom(couponRequestDTO);
+    public String saveCoupon(@ModelAttribute CouponRequestDTO couponRequestDTO, RedirectAttributes redirectAttributes) {
+        // Cria o cupom
+        var result = createCupomFrontService.createCupom(couponRequestDTO);
+
+        // Busca o último cupom criado
+        var lastCoupon = listFinalCouponService.listFinalCoupons();
+
+        if (result == null) {
+            redirectAttributes.addFlashAttribute("message_error", "Erro ao criar cupom");
+        } else {
+            redirectAttributes.addFlashAttribute("message_created", "Cupom criado com sucesso!");
+            redirectAttributes.addFlashAttribute("lastCoupon", result);
+        }
+
         return "redirect:/admin/create-cupom";
     }
+
 
     @ModelAttribute("cupom")
     public CouponRequestDTO couponRequestDTO() {
