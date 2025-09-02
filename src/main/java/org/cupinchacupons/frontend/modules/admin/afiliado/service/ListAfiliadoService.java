@@ -1,6 +1,7 @@
 package org.cupinchacupons.frontend.modules.admin.afiliado.service;
 
 import org.cupinchacupons.backend.modules.afiliado.dto.AfiliadoResponseDTO;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -11,9 +12,9 @@ public class ListAfiliadoService {
 
     private final WebClient webClient;
 
-    public ListAfiliadoService(WebClient.Builder builder) {
+    public ListAfiliadoService(WebClient.Builder builder, @Value("${backend.api.base-url}") String baseUrl) {
         this.webClient = builder
-                .baseUrl("http://localhost:8080") // sempre aponta para a API backend
+                .baseUrl(baseUrl)
                 .build();
     }
 

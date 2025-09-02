@@ -1,6 +1,7 @@
 package org.cupinchacupons.frontend.modules.admin.cupom.service;
 
 import org.cupinchacupons.backend.modules.cupom.dto.CouponResponseDTO;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -11,9 +12,9 @@ public class ListAllCoupunsService {
 
     private final WebClient webClient;
 
-    public ListAllCoupunsService(WebClient.Builder builder) {
+    public ListAllCoupunsService(WebClient.Builder builder, @Value("$backend.base.url") String baseUrl) {
         this.webClient = builder
-                .baseUrl("http://localhost:8080") // sempre aponta para a API backend
+                .baseUrl(baseUrl)
                 .build();
     }
 

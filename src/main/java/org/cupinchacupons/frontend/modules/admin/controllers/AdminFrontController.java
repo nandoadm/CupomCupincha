@@ -7,6 +7,7 @@ import org.cupinchacupons.backend.modules.loja.repository.LojaRepository;
 import org.cupinchacupons.frontend.modules.admin.afiliado.service.ListAfiliadoService;
 import org.cupinchacupons.frontend.modules.admin.categoria.service.ListCategoriaService;
 import org.cupinchacupons.frontend.modules.admin.cupom.service.CreateCupomService;
+import org.cupinchacupons.frontend.modules.admin.cupom.service.DeletCouponService;
 import org.cupinchacupons.frontend.modules.admin.cupom.service.ListAllCoupunsService;
 import org.cupinchacupons.frontend.modules.admin.cupom.service.ListFinalCouponService;
 import org.cupinchacupons.frontend.modules.admin.loja.service.ListStoreService;
@@ -15,6 +16,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/admin")
@@ -29,6 +32,7 @@ public class AdminFrontController {
     private final AfiliadoRepository afiliadoRepository;
     private final LojaRepository lojaRepository;
     private final ListFinalCouponService listFinalCouponService;
+    private final DeletCouponService deletCouponService;
 
     public AdminFrontController(
             CreateCupomService createCupomFrontService,
@@ -38,7 +42,7 @@ public class AdminFrontController {
             ListStoreService listStoreService,
             CategoriaRepository categoriaRepository,
             AfiliadoRepository afiliadoRepository,
-            LojaRepository lojaRepository, ListFinalCouponService listFinalCouponService
+            LojaRepository lojaRepository, ListFinalCouponService listFinalCouponService, DeletCouponService deletCouponService
     ) {
         this.createCupomFrontService = createCupomFrontService;
         this.listAllCoupunsService = listAllCoupunsService;
@@ -49,6 +53,7 @@ public class AdminFrontController {
         this.afiliadoRepository = afiliadoRepository;
         this.lojaRepository = lojaRepository;
         this.listFinalCouponService = listFinalCouponService;
+        this.deletCouponService = deletCouponService;
     }
 
     @GetMapping("/")
@@ -94,12 +99,13 @@ public class AdminFrontController {
 
                 break;
             case "Categorias":
-                var categorias = listCategoriaService.listCategoria(filter);
-                model.addAttribute("categorias", categorias);
-                if (categorias.isEmpty()) {
+                var listedCategoria = listCategoriaService.listCategoria(filter);
+                model.addAttribute("categorias", listedCategoria);
+                if (listedCategoria.isEmpty()) {
                     model.addAttribute("filter_error", true);
-                    model.addAttribute("message_error", "Nenhuma categoria encontrado com o filtro '" + filter + "'");
+                    model.addAttribute("message_error", "Nenhuma categoria encontrada com o filtro '" + filter + "'");
                 }
+
                 break;
             case "Lojas":
                 var lojas = listStoreService.execute(filter);
@@ -123,6 +129,21 @@ public class AdminFrontController {
         }
 
         return "users/admin";
+    }
+
+    @DeleteMapping("/delete-coupon/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public String deleteCoupon(@PathVariable("id") UUID id, RedirectAttributes redirectAttributes) {
+
+
+        var resul = deletCouponService.deleteCoupon(id);
+        if (resul.equals("success")) {
+            redirectAttributes.addFlashAttribute("message_delete", "Cupom deletado com sucesso!");
+        } else {
+            redirectAttributes.addFlashAttribute("message_error_delete", "Erro ao deletar cupom");
+        }
+
+        return "redirect:/admin/posts?filter=";
     }
 
     @GetMapping("/create-cupom")

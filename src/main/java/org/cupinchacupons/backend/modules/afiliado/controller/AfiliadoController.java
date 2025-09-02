@@ -24,7 +24,8 @@ public class AfiliadoController {
     public ResponseEntity<Object> createAfiliado(@RequestBody AfiliadoEntity afiliadoEntity) {
         try {
             var result = this.createAfiliadoUseCase.execute(afiliadoEntity);
-            return ResponseEntity.ok().body(result);
+            ResponseEntity<Object> body = ResponseEntity.ok().body(result);
+            return body;
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }

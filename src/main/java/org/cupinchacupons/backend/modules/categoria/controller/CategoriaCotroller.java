@@ -6,6 +6,7 @@ import org.cupinchacupons.backend.modules.categoria.useCase.ListCategoriaUseCase
 import org.cupinchacupons.backend.modules.entity.CategoriaEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -22,6 +23,7 @@ public class CategoriaCotroller {
     }
 
     @PostMapping("/categoria")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Object> createCategoria(@RequestBody CategoriaEntity categoriaEntity) {
         try {
             var result = this.createCategoriaUseCase.createCategoria(categoriaEntity);
@@ -31,7 +33,8 @@ public class CategoriaCotroller {
         }
     }
 
-    @GetMapping("/listarCategoria")
+    @GetMapping("/listar-categoria")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Object> listarCategoria(@RequestParam(required = false) String filtro){
         try{
             var result = this.listCategoriaUseCase.execute(filtro);

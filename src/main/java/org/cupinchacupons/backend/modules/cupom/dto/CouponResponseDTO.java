@@ -24,6 +24,7 @@ public class CouponResponseDTO {
     private double desconto;
     private String restricao;
     private String createdAt;
+    private String img_url;
 
     private String categoriaDescricao;
     private String afiliadoNome;

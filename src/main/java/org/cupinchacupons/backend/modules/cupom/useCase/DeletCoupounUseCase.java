@@ -15,15 +15,14 @@ public class DeletCoupounUseCase {
         this.cupomRepository = cupomRepository;
     }
 
-    public void deleteCoupon(UUID id) {
+    public String deleteCoupon(UUID id) {
         try {
         var coupon = cupomRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Coupon not found"));
+                .orElseThrow(() -> new RuntimeException("Coupon found"));
         cupomRepository.delete(coupon);
+        return "sucess";
         } catch (Exception e) {
             throw new RuntimeException("Error deleting coupon");
         }
-
-
     }
 }

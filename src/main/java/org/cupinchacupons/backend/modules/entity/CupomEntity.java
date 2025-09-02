@@ -56,6 +56,9 @@ public class CupomEntity {
     @Column(name = "ativo")
     private Integer ativo;
 
+    @Column(name = "img_url")
+    private String img_url;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "categoria_id")
     private CategoriaEntity categoria;

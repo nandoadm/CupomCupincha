@@ -53,6 +53,7 @@ public class CreateCouponUseCase {
                 .restricoes(dto.getRestricoes())
                 .slug(dto.getSlug())
                 .desconto(dto.getDesconto())
+                .img_url(dto.getImg_url())
                 .categoria(categoria)
                 .afiliado(afiliado)
                 .loja(loja)
@@ -72,7 +73,7 @@ public class CreateCouponUseCase {
                 .categoriaDescricao(saved.getCategoria().getDescricao())
                 .afiliadoNome(saved.getAfiliado().getNome())
                 .lojaNome(saved.getLoja().getNome())
-                .createdAt(saved.getCreated_At().toString())
+                .img_url(saved.getImg_url())
                 .build();
     }
 }

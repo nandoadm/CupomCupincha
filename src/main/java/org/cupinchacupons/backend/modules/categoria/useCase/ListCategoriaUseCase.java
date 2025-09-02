@@ -1,3 +1,4 @@
+/* <<<<<<<<<<<<<<  ✨ Windsurf Command 🌟 >>>>>>>>>>>>>>>> */
 package org.cupinchacupons.backend.modules.categoria.useCase;
 
 import org.cupinchacupons.backend.modules.categoria.dto.CategoriaResponseDTO;
@@ -5,6 +6,7 @@ import org.cupinchacupons.backend.modules.categoria.repository.CategoriaReposito
 import org.cupinchacupons.backend.modules.entity.CategoriaEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,14 +20,13 @@ public class ListCategoriaUseCase {
         this.categoriaRepository = categoriaRepository;
     }
 
-    public List<CategoriaResponseDTO> execute(String filtro) {
-        List<CategoriaEntity> categorias;
+    public List<CategoriaResponseDTO> execute(String Filter) {
 
-        if (filtro == null || filtro.isBlank()) {
-            categorias = categoriaRepository.findAll();
-        } else {
-            categorias = categoriaRepository.findAllByDescricaoContainingIgnoreCase(filtro);
-        }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
+        List<CategoriaEntity> categorias = ((Filter == null || Filter.isEmpty())
+                ? categoriaRepository.findAll()
+                : categoriaRepository.findAllByDescricaoContainingIgnoreCase(Filter));
 
         return categorias.stream()
                 .sorted(
@@ -35,6 +36,9 @@ public class ListCategoriaUseCase {
                         CategoriaResponseDTO.builder()
                                 .id(categoria.getId())
                                 .descricao(categoria.getDescricao())
+                                .createdAt(categoria.getCreatedAt() != null
+                                        ? categoria.getCreatedAt().format(formatter)
+                                        : null)
                                 .build()
                 )
                 .collect(Collectors.toList());

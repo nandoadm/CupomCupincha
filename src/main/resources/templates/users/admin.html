@@ -75,10 +75,12 @@
                 </select>
                 <button type="submit">Buscar</button>
             </form>
-                <p class="message-error" th:text="${message_error}" th:if="${filter_error}"></p>
+            <p class="message-error" th:text="${message_error}" th:if="${filter_error}"></p>
 
             <!-- Lista de cupons -->
             <div>
+                <div th:if="${message_delete}" th:text="${message_delete}"></div>
+                <div th:if="${message_error_delete}" th:text="${message_error}"></div>
                 <table th:if="${!#lists.isEmpty(coupons)}" border="1" cellpadding="5">
                     <thead>
                     <tr>
@@ -92,6 +94,8 @@
                         <th>Afiliado</th>
                         <th>Loja</th>
                         <th>Data de cadastro</th>
+                        <th>imagem</th>
+                        <th>Deletar</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -105,28 +109,41 @@
                         <td th:text="${c.categoriaDescricao}"></td>
                         <td th:text="${c.afiliadoNome}"></td>
                         <td th:text="${c.lojaNome}"></td>
+                        <td th:text="${c.img_url}"></td>
                         <td th:text="${c.createdAt}"></td>
+                        <td>
+                            <form th:action="@{/admin/delete-coupon/{id}(id=${c.id})}" method="post"
+                                  style="display:inline;">
+                                <input type="hidden" name="_method" value="delete"/>
+                                <button type="submit" class="btn-deletar">
+                                    <i class="bi bi-trash"></i> Deletar
+                                </button>
+                            </form>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
             </div>
-            <div>
-                <table th:if="${!#lists.isEmpty(categoria)}" border="1" cellpadding="5">
+
+            <div th:if="${opcao == 'Categorias'}">
+                <table th:if="${!#lists.isEmpty(categorias)}" border="1" cellpadding="5">
                     <thead>
                     <tr>
                         <th>Categoria</th>
+                        <th>Data de cadastro</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="cat : ${categoria}">
-                        <td th:text="${cat.descricao}"></td>
+                    <tr th:each="c : ${categorias}">
+                        <td th:text="${c.descricao}"></td>
+                        <td th:text="${c.createdAt}"></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
 
             <div>
-                <table th:if="${!#lists.isEmpty(loja)}" border="1" cellpadding="5">
+                <table th:if="${!#lists.isEmpty(lojas)}" border="1" cellpadding="5">
                     <thead>
                     <tr>
                         <th>Nome</th>
@@ -134,7 +151,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="l : ${loja}">
+                    <tr th:each="l : ${lojas}">
                         <td th:text="${l.nome}"></td>
                         <td th:text="${l.url}"></td>
                     </tr>
@@ -143,7 +160,7 @@
             </div>
 
             <div>
-                <table th:if="${!#lists.isEmpty(afiliado)}" border="1" cellpadding="5">
+                <table th:if="${!#lists.isEmpty(afiliados)}" border="1" cellpadding="5">
                     <thead>
                     <tr>
                         <th>Nome</th>
@@ -152,7 +169,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="a : ${afiliado}">
+                    <tr th:each="a : ${afiliados}">
                         <td th:text="${a.nome}"></td>
                         <td th:text="${a.cnpj}"></td>
                         <td th:text="${a.createdAt}"></td>
@@ -233,7 +250,6 @@
                     </tbody>
                 </table>
             </div>
-
         </div>
 
         <div th:case="'categorias'">

@@ -24,6 +24,7 @@ public class CouponRequestDTO {
     private String categoriaDescricao;
     private String afiliadoNome;
     private String lojaNome;
+    private String img_url;
 
     private UUID categoriaId;
     private UUID afiliadoId;

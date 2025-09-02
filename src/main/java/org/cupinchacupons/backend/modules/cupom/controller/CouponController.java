@@ -74,4 +74,5 @@ public class CouponController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
+
 }

@@ -36,6 +36,7 @@ public class ListCouponsUseCase {
                 .descricao(CupomResponse.getDescricao())
                 .Codigo(CupomResponse.getCodigo())
                 .slug(CupomResponse.getSlug())
+                .img_url(CupomResponse.getImg_url())
                 .createdAt(CupomResponse.getCreated_At() != null
                         ? CupomResponse.getCreated_At().format(formatter)
                         : null)
@@ -65,6 +66,7 @@ public class ListCouponsUseCase {
                 .descricao(lastCoupon.getDescricao())
                 .Codigo(lastCoupon.getCodigo())
                 .slug(lastCoupon.getSlug())
+                .img_url(lastCoupon.getImg_url())
                 .createdAt(lastCoupon.getCreated_At() != null
                         ? lastCoupon.getCreated_At().format(formatter)
                         : null)

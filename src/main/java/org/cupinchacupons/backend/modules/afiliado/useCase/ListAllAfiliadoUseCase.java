@@ -4,7 +4,6 @@ package org.cupinchacupons.backend.modules.afiliado.useCase;
 import org.cupinchacupons.backend.modules.afiliado.dto.AfiliadoResponseDTO;
 import org.cupinchacupons.backend.modules.afiliado.repository.AfiliadoRepository;
 import org.cupinchacupons.backend.modules.entity.AfiliadoEntity;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -14,8 +13,11 @@ import java.util.stream.Collectors;
 @Service
 public class ListAllAfiliadoUseCase {
 
-    @Autowired
-    public AfiliadoRepository afiliadoRepository;
+    public final AfiliadoRepository afiliadoRepository;
+
+    public ListAllAfiliadoUseCase(AfiliadoRepository afiliadoRepository) {
+        this.afiliadoRepository = afiliadoRepository;
+    }
 
     public List<AfiliadoResponseDTO> execute(String filtro) {
         List<AfiliadoEntity> afiliados;

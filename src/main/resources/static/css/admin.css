@@ -228,3 +228,20 @@ table tr:hover {
     }
 }
 
+.btn-deletar {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: white;
+    background-color: #e74d8b;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background 0.3s;
+}
+
+.btn-deletar:hover {
+    background-color: #c6006d;
+}
+
